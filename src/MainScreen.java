@@ -9,7 +9,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 //import javafx.scene.*;
 
-public class Screens extends Application {
+public class MainScreen extends Application {
     public static void main(String[] args) {
         launch(args);
     }

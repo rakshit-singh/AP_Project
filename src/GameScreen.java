@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginScreen extends Application {
+public class GameScreen extends Application {
     @FXML
     public Stage primaryStage;
     @FXML
@@ -21,7 +21,7 @@ public class LoginScreen extends Application {
         this.primaryStage = primaryStage;
     }
 
-    public LoginScreen(){
+    public GameScreen(){
 
     }
 
@@ -36,11 +36,10 @@ public class LoginScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
         scene = new Scene(root);
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
-
     }
 
 }

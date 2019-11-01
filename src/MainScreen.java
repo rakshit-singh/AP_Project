@@ -1,58 +1,64 @@
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-//import javafx.scene.*;
+
+import java.security.Timestamp;
 
 public class MainScreen extends Application {
-    public static void main(String[] args) {
-        launch(args);
+    @FXML
+    private Button Play_Game,Resume_Game,Exit_Game;
+    @FXML
+    private Stage primaryStage;
+    public MainScreen() {
+        primaryStage=new Stage();
     }
-    //Override the start method in the Application class
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+        this.primaryStage=primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+        Scene scene = new Scene(root);
+        this.primaryStage.setTitle("Main Screen");
+        this.primaryStage.setScene(scene);
+        this.primaryStage.show();
+//        Platform.runLater(() -> primaryStage.close());
 
-        Image image =new Image("wallpaper.jpg");
-        ImageView mv=new ImageView(image);
-        // Setting wallpaper according to screen size
-        mv.setFitWidth(Screen.getPrimary().getVisualBounds().getWidth());
-        mv.setFitHeight(Screen.getPrimary().getVisualBounds().getHeight());
-        Group root=new Group();
-        root.getChildren().addAll(mv);
-        primaryStage.setTitle("Main Screen");
-        Button Play_btn = new Button("Play Game");
-        Play_btn.setLayoutX(Screen.getPrimary().getVisualBounds().getWidth()/2);
-        Play_btn.setLayoutY(Screen.getPrimary().getVisualBounds().getHeight()/2);
-        Play_btn.setScaleX(4);
-        Play_btn.setScaleY(4);
+//        this.primaryStage.close();
+    }
+    @FXML
+    public void PlayControl(ActionEvent event) throws Exception {
 
-        Button Resume_btn = new Button("Resume   ");
-        Resume_btn.setLayoutX(Screen.getPrimary().getVisualBounds().getWidth()/2);
-        Resume_btn.setLayoutY(Play_btn.getLayoutY()+150);
-        Resume_btn.setScaleX(4);
-        Resume_btn.setScaleY(4);
-        Button Exit_button=new Button("Exit Game");
-        Exit_button.setLayoutX(Screen.getPrimary().getVisualBounds().getWidth()/2);
-        Exit_button.setLayoutY(Resume_btn.getLayoutY()+150);
-        Exit_button.setScaleX(4);
-        Exit_button.setScaleY(4);
-//        Group buttons=new Group();
-//        System.out.println(Play_btn.getWidth());
-//        Play_btn.setMinWidth(Play_btn.getWidth());
-        Resume_btn.setMinWidth(Play_btn.getWidth());
-        Exit_button.setMinWidth(Play_btn.getWidth());
+        Parent loader = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));//Creates a Parent called loader and assign it as ScReen2.FXML
 
+        Scene scene = new Scene(loader); //This creates a new scene called scene and assigns it as the Sample.FXML document which was named "loader"
+        Stage app_stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        app_stage.setScene(scene);
 
-        root.getChildren().addAll(Play_btn,Resume_btn,Exit_button);
-        Scene scene = new Scene(root, 200, 250);
-        primaryStage.setScene(scene);
-// Display the stage
-        primaryStage.show();
+        app_stage.show();
+    }
+    @FXML
+    public void ExitControl(){
+        System.exit(1);
+    }
+    public static void main(String[] args) throws Exception {
+        launch(args);
+//        controlButton();
+
     }
 
 }

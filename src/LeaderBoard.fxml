@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="730.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="1500.0" pickOnBounds="true">
+         <image>
+            <Image url="@../bin/assets/LeaderBoard.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="271.0" layoutY="88.0" scaleX="5.0" scaleY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LeaderBoard" textAlignment="CENTER" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="Berlin Sans FB" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="147.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="303.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="147.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1) Josh" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="147.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2) Aron" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="147.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3) Kevin" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="147.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4) Michael" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="170" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="102" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

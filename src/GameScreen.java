@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
@@ -34,6 +35,11 @@ public class GameScreen extends Application {
     public  ImageView sidebar_walnut;
     @FXML
     public javafx.scene.control.Label sun;
+
+    public ImageView falling_sun;
+
+    @FXML
+    public Slider slider;
     private boolean isPlaced=false;
     private int sunCount=200;
     @FXML
@@ -177,9 +183,16 @@ public class GameScreen extends Application {
         else{
             sidebar_shooter.setOpacity(1);
         }
-    }
 
+    }
     public void put(MouseEvent e){
         isPlaced=true;
+    }
+    public void  FallingSun(){
+        Image i=new Image("falling_sun.jpg");
+        falling_sun=new ImageView(i);
+        Anchor.getChildren().add(falling_sun);
+
+
     }
 }

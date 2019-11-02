@@ -3,8 +3,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 
 public class GameScreen extends Application {
@@ -41,5 +47,23 @@ public class GameScreen extends Application {
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
     }
+    @FXML
+    private ImageView shooter_button;
+    @FXML
+    private AnchorPane Anchor;
+    private ImageView shooter_gif;
+     @FXML
+    public void move(MouseEvent e){
+         Image i=new Image("shooter_gif.gif");
+         shooter_gif=new ImageView(i);
+         Anchor.getChildren().add(shooter_gif);
+//         shooter_gif.setVisible(true);
+         shooter_gif.setX(e.getX());
+         shooter_gif.setY(e.getY());
+//         shooter_gif.setX(e.getX());
+//         shooter_gif.setY(e.getY());
+//         System.out.println(e.getX());
+     }
+
 
 }

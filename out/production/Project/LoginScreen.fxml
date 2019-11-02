@@ -15,7 +15,7 @@
             <Image url="@LoginImage.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="1033.0" layoutY="348.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="224.0" text="Existing User">
+      <Button layoutX="1033.0" layoutY="348.0" mnemonicParsing="false" onAction="#startGame" prefHeight="60.0" prefWidth="224.0" text="Existing User">
          <font>
             <Font name="Times New Roman" size="30.0" />
          </font></Button>

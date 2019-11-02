@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="Anchor" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameScreen">
+<AnchorPane id="Anchor" fx:id="Anchor" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#move" onMouseReleased="#put" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameScreen">
    <children>
-      <ImageView fitHeight="700.0" fitWidth="1967.0" onMouseClicked="#move" pickOnBounds="true">
+      <ImageView fitHeight="700.0" fitWidth="1311.0" layoutX="-10.0" pickOnBounds="true">
          <image>
             <Image url="@day_background.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="shooter" fitHeight="64.0" fitWidth="83.0" layoutX="5.0" layoutY="18.0" onDragDetected="#move" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="shooter" fitHeight="64.0" fitWidth="83.0" layoutX="5.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@shooter.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseDragged="#move" opacity="0.0" prefHeight="54.0" prefWidth="65.0" text="Shooter" />
+      <Button layoutX="15.0" layoutY="17.0" mnemonicParsing="false" onAction="#spawn" opacity="0.0" prefHeight="54.0" prefWidth="65.0" text="Shooter" />
       <ImageView fitHeight="53.0" fitWidth="74.0" layoutX="10.0" layoutY="80.0" pickOnBounds="true">
          <image>
             <Image url="@Sunflower.jpg" />
@@ -42,5 +44,11 @@
          </image>
       </ImageView>
       <Button layoutX="10.0" layoutY="284.0" mnemonicParsing="false" opacity="0.0" prefHeight="54.0" prefWidth="74.0" text="Repeater" />
+      <ButtonBar layoutX="999.0" layoutY="24.0" prefHeight="40.0" prefWidth="200.0" />
+      <Button layoutX="1146.0" layoutY="14.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" text="Menu" textAlignment="CENTER">
+         <font>
+            <Font name="Times New Roman Bold" size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

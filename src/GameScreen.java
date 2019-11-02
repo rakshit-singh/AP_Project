@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.beans.EventHandler;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class GameScreen extends Application {
@@ -48,22 +50,30 @@ public class GameScreen extends Application {
 //        primaryStage.show();
     }
     @FXML
-    private ImageView shooter_button;
-    @FXML
-    private AnchorPane Anchor;
-    private ImageView shooter_gif;
-     @FXML
-    public void move(MouseEvent e){
-         Image i=new Image("shooter_gif.gif");
-         shooter_gif=new ImageView(i);
-         Anchor.getChildren().add(shooter_gif);
-//         shooter_gif.setVisible(true);
-         shooter_gif.setX(e.getX());
-         shooter_gif.setY(e.getY());
-//         shooter_gif.setX(e.getX());
-//         shooter_gif.setY(e.getY());
-//         System.out.println(e.getX());
+    private Button shooter_button;
+         @FXML
+         private AnchorPane Anchor;
+         @FXML
+         private ImageView shooter_gif;
+
+         @FXML
+         public void move(MouseEvent e){
+    //         shooter_gif.setVisible(true);
+             shooter_gif.setX(e.getX()-10);
+             shooter_gif.setY(e.getY());
+             System.out.println(e.getSource());
      }
 
 
+    @FXML
+    public void spawn(javafx.event.ActionEvent actionEvent) {
+        Image i=new Image("shooter_gif.gif");
+        shooter_gif=new ImageView(i);
+        Anchor.getChildren().add(shooter_gif);
+        System.out.println(actionEvent.getSource());
+    }
+
+    public void put(MouseEvent e){
+            
+    }
 }

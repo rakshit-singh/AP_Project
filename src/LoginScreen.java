@@ -46,9 +46,8 @@ public class LoginScreen extends Application {
     }
     @FXML
     public void startGame(ActionEvent e) throws IOException {
-        Parent loader = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));//Creates a Parent called loader and assign it as ScReen2.FXML
-
-        Scene scene = new Scene(loader); //This creates a new scene called scene and assigns it as the Sample.FXML document which was named "loader"
+        Parent loader = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+        Scene scene = new Scene(loader);
         Stage app_stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         app_stage.setScene(scene);
 

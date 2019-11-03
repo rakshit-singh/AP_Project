@@ -1,16 +1,15 @@
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.util.Random;
@@ -58,7 +59,7 @@ public class GameScreen extends Application implements Initializable{
 
 
 	@FXML
-	public Slider slider;
+	public ProgressBar slider;
 	private boolean isPlaced = false;
 	private int sunCount = 200;
 	@FXML
@@ -162,8 +163,6 @@ public class GameScreen extends Application implements Initializable{
 	public void spawn_sunflower(javafx.event.ActionEvent actionEvent) {
 		if (sunCount >= 50) {
 			pea_spawnable=true;
-
-
 			Image i = new Image("sunflower_gif.gif");
 			sunflower_gif = new ImageView(i);
 			sunflower_gif.setScaleX(0.5);
@@ -210,6 +209,7 @@ public class GameScreen extends Application implements Initializable{
 			sidebar_shooter.setOpacity(1);
 		}
 
+
 	}
 
 //	public void put(MouseEvent e) {
@@ -217,10 +217,20 @@ public class GameScreen extends Application implements Initializable{
 //	}
 
 	public void FallingSun() {
+//		slider.setTranslateX(0);
+		moveSlider();
 		this.setupTimeline();
 	}
 //50,180,310,440,570
+	@FXML
+	public void inGameMenu(ActionEvent e) throws IOException {
+		Parent loader = FXMLLoader.load(getClass().getResource("P1.fxml"));//Creates a Parent called loader and assign it as ScReen2.FXML
 
+		Scene scene = new Scene(loader); //This creates a new scene called scene and assigns it as the Sample.FXML document which was named "loader"
+		Stage app_stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+		app_stage.setScene(scene);
+		app_stage.show();
+	}
 
 
 	@Override
@@ -257,7 +267,6 @@ public class GameScreen extends Application implements Initializable{
 			Random r=new Random();
 			Image i = new Image("falling_sun.jpg");
 			falling_sun = new ImageView(i);
-
 			falling_sun.setLayoutX(Math.abs(r.nextInt())%900);
 			falling_sun.setScaleY(0.5);
 			falling_sun.setScaleX(0.5);
@@ -289,16 +298,39 @@ public class GameScreen extends Application implements Initializable{
 			isPlaced = true;
 			ImageView img = new Pea().getPea();
 			Anchor.getChildren().add(img);
-			img.setX(e.getX());
-			img.setY(e.getY());
+			img.setX(e.getX()+100);
+			img.setY(e.getY()+80);
 			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
 			translatorObj.setToX(1200);
 			translatorObj.setCycleCount(Animation.INDEFINITE);
 			translatorObj.play();
 			pea_spawnable = false;
 		}
+		Timeline t=new Timeline();
 
 	}
+	@FXML
+	public void moveSlider() {
+
+		Timeline task = new Timeline(
+				new KeyFrame(
+						Duration.ZERO,
+						new KeyValue(slider.progressProperty(), 0)
+				),
+				new KeyFrame(
+						Duration.seconds(60),
+						new KeyValue(slider.progressProperty(), 1)
+				));
+		task.playFromStart();
+	}
+
+
+
+
+
+
+
+
 
 
 	final class Pea {

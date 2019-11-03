@@ -25,12 +25,12 @@
                         <Image url="@wallpaper.jpg" />
                     </image>
                 </ImageView>
-                <Button id="Play_button" alignment="CENTER" layoutX="518.0" layoutY="357.0" mnemonicParsing="false" onAction="#PlayControl" prefHeight="56.0" prefWidth="229.0" text="Play Game">
+                <Button id="Play_button" alignment="CENTER" layoutX="518.0" layoutY="240.0" mnemonicParsing="false" onAction="#PlayControl" prefHeight="56.0" prefWidth="229.0" text="Play Game">
                     <font>
                         <Font name="Times New Roman" size="30.0" />
                     </font>
                 </Button>
-                <Button id="Resume_button" alignment="CENTER" layoutX="513.0" layoutY="447.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="238.0" text="Resume Game">
+                <Button id="Resume_button" alignment="CENTER" layoutX="514.0" layoutY="323.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="238.0" text="Resume Game">
                     <font>
                         <Font name="Times New Roman" size="30.0" />
                     </font>
@@ -40,7 +40,12 @@
                         <Font name="Times New Roman" size="30.0" />
                     </font>
                 </Button>
-            <Button layoutX="513.0" layoutY="536.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="238.0" text="Leaderboard">
+            <Button layoutX="514.0" layoutY="400.0" mnemonicParsing="false" onAction="#LeaderBoardControl" prefHeight="54.0" prefWidth="238.0" text="Leaderboard">
+               <font>
+                  <Font name="Times New Roman" size="30.0" />
+               </font>
+            </Button>
+            <Button layoutX="514.0" layoutY="479.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="238.0" text="Choose Level">
                <font>
                   <Font name="Times New Roman" size="30.0" />
                </font>

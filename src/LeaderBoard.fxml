@@ -6,66 +6,66 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="730.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="730.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LeaderBoard">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1500.0" pickOnBounds="true">
          <image>
-            <Image url="@../bin/assets/LeaderBoard.jpg" />
+            <Image url="@LeaderBoard.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="271.0" layoutY="88.0" scaleX="5.0" scaleY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LeaderBoard" textAlignment="CENTER" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
+      <Text layoutX="271.0" layoutY="88.0" scaleX="5.0" scaleY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leaderboard" textAlignment="CENTER" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
          <font>
             <Font name="Berlin Sans FB" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="147.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+      <Text layoutX="579.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
          <font>
-            <Font size="18.0" />
+            <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="303.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score">
+      <Text layoutX="786.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" wrappingWidth="111.9755859375">
          <font>
-            <Font size="18.0" />
+            <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="147.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1) Josh" textAlignment="CENTER">
+      <Text layoutX="587.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1) Josh" textAlignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="147.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2) Aron" textAlignment="CENTER">
+      <Text layoutX="586.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2) Aron" textAlignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="147.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3) Kevin" textAlignment="CENTER">
+      <Text layoutX="587.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3) Kevin" textAlignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="147.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4) Michael" textAlignment="CENTER">
+      <Text layoutX="586.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4) Michael" textAlignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="314.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="200">
+      <Text layoutX="818.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
          <font>
-            <Font size="15.0" />
+            <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="314.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="170" textAlignment="CENTER">
+      <Text layoutX="820.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="314.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="102" textAlignment="CENTER">
+      <Text layoutX="820.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="314.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" textAlignment="CENTER">
+      <Text layoutX="818.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font size="30.0" />
          </font>
       </Text>
    </children>

@@ -52,6 +52,18 @@ public class MainScreen extends Application {
         app_stage.show();
     }
     @FXML
+    public void LeaderBoardControl(ActionEvent event) throws Exception {
+
+        Parent loader = FXMLLoader.load(getClass().getResource("LeaderBoard.fxml"));//Creates a Parent called loader and assign it as ScReen2.FXML
+
+        Scene scene = new Scene(loader); //This creates a new scene called scene and assigns it as the Sample.FXML document which was named "loader"
+        Stage app_stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        app_stage.setScene(scene);
+
+        app_stage.show();
+    }
+
+    @FXML
     public void ExitControl(){
         System.exit(1);
     }
@@ -60,5 +72,7 @@ public class MainScreen extends Application {
 //        controlButton();
 
     }
+
+
 
 }

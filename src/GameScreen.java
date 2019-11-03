@@ -101,8 +101,8 @@ public class GameScreen extends Application implements Initializable{
 	public void move_shooter(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			shooter_gif.setX(e.getX() - 10);
-			shooter_gif.setY(e.getY());
+			shooter_gif.setX(e.getX() - 80);
+			shooter_gif.setY(e.getY()- 80);
 			System.out.println(e.getSource());
 		}
 	}
@@ -121,8 +121,8 @@ public class GameScreen extends Application implements Initializable{
 	public void move_sunflower(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			sunflower_gif.setX(e.getX() - 10);
-			sunflower_gif.setY(e.getY());
+			sunflower_gif.setX(e.getX() - 80);
+			sunflower_gif.setY(e.getY() - 80);
 			System.out.println(e.getSource());
 		}
 	}
@@ -131,8 +131,8 @@ public class GameScreen extends Application implements Initializable{
 	public void move_walnut(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			walnut_gif.setX(e.getX() - 10);
-			walnut_gif.setY(e.getY());
+			walnut_gif.setX(e.getX() - 80);
+			walnut_gif.setY(e.getY() - 80);
 			System.out.println(e.getSource());
 		}
 	}
@@ -289,8 +289,8 @@ public class GameScreen extends Application implements Initializable{
 			isPlaced = true;
 			ImageView img = new Pea().getPea();
 			Anchor.getChildren().add(img);
-			img.setX(e.getX());
-			img.setY(e.getY());
+			img.setX(e.getX() + 20.5);
+			img.setY(e.getY() - 3);
 			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
 			translatorObj.setToX(1200);
 			translatorObj.setCycleCount(Animation.INDEFINITE);

@@ -51,7 +51,10 @@ public class GameScreen extends Application implements Initializable{
 	public javafx.scene.control.Label sun;
 	@FXML
 	public ImageView zombie_gif;
-
+	@FXML
+	public ImageView cherry_img;
+	@FXML
+	public ImageView repeeater_img;
 	@FXML
 	public ImageView falling_sun;
 
@@ -102,8 +105,8 @@ public class GameScreen extends Application implements Initializable{
 	public void move_shooter(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			shooter_gif.setX(e.getX() - 10);
-			shooter_gif.setY(e.getY());
+			shooter_gif.setX(e.getX() - 80);
+			shooter_gif.setY(e.getY()- 80);
 			System.out.println(e.getSource());
 		}
 	}
@@ -122,8 +125,8 @@ public class GameScreen extends Application implements Initializable{
 	public void move_sunflower(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			sunflower_gif.setX(e.getX() - 10);
-			sunflower_gif.setY(e.getY());
+			sunflower_gif.setX(e.getX() - 80);
+			sunflower_gif.setY(e.getY() - 80);
 			System.out.println(e.getSource());
 		}
 	}
@@ -132,8 +135,8 @@ public class GameScreen extends Application implements Initializable{
 	public void move_walnut(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			walnut_gif.setX(e.getX() - 10);
-			walnut_gif.setY(e.getY());
+			walnut_gif.setX(e.getX() - 80);
+			walnut_gif.setY(e.getY() - 80);
 			System.out.println(e.getSource());
 		}
 	}
@@ -208,6 +211,8 @@ public class GameScreen extends Application implements Initializable{
 		} else {
 			sidebar_shooter.setOpacity(1);
 		}
+//		repeeater_img.setOpacity(0.5);
+//		cherry_img.setOpacity(0.5);
 
 
 	}
@@ -294,12 +299,16 @@ public class GameScreen extends Application implements Initializable{
 		}
 	};
 	public void put(MouseEvent e) {
-		if(pea_spawnable) {
-			isPlaced = true;
+		isPlaced = true;
+		if(pea_spawnable && curGif==0) {
 			ImageView img = new Pea().getPea();
 			Anchor.getChildren().add(img);
 			img.setX(e.getX()+100);
 			img.setY(e.getY()+80);
+
+			img.setX(e.getX() + 20.5);
+			img.setY(e.getY() - 3);
+
 			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
 			translatorObj.setToX(1200);
 			translatorObj.setCycleCount(Animation.INDEFINITE);

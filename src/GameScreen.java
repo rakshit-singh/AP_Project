@@ -28,7 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 //<<<<<<< HEAD
 
-public class GameScreen extends Application implements Initializable{
+public class GameScreen extends Application implements Initializable {
 	@FXML
 	private Button shooter_button;
 	@FXML
@@ -57,10 +57,11 @@ public class GameScreen extends Application implements Initializable{
 	public ImageView repeeater_img;
 	@FXML
 	public ImageView falling_sun;
+	@FXML
+	public ImageView CherryBomb_gif;
 
-
-	public Lawn lawn=new Lawn();
-	private int[] y_coord={50,180,310,420,540};
+	public Lawn lawn = new Lawn();
+	private int[] y_coord = { 50, 180, 310, 420, 540 };
 	@FXML
 	public ProgressBar slider;
 	private boolean isPlaced = false;
@@ -79,7 +80,9 @@ public class GameScreen extends Application implements Initializable{
 	public void setPrimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
+
 	private boolean pea_spawnable;
+
 	public GameScreen() {
 
 	}
@@ -95,21 +98,19 @@ public class GameScreen extends Application implements Initializable{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
+		// primaryStage.setScene(scene);
+		// primaryStage.show();
 	}
-
 
 	@FXML
 	public void move_shooter(MouseEvent e) {
-		//         shooter_gif.setVisible(true);
+		// shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			double x=e.getX()-80;
-			double y=e.getY()-80;
-			double[] curr=lawn.correct_layout(x,y);
-			shooter_gif.setX(curr[0]-70);
-			shooter_gif.setY(curr[1]-50);
+			double x = e.getX() - 80;
+			double y = e.getY() - 80;
+			double[] curr = lawn.correct_layout(x, y);
+			shooter_gif.setX(curr[0] - 70);
+			shooter_gif.setY(curr[1] - 50);
 			System.out.println(e.getSource());
 		}
 	}
@@ -121,48 +122,62 @@ public class GameScreen extends Application implements Initializable{
 			move_sunflower(e);
 		} else if (curGif == 2) {
 			move_walnut(e);
+		} else if (curGif == 3) {
+			move_CherryBomb(e);
 		}
 	}
 
 	@FXML
 	public void move_sunflower(MouseEvent e) {
-		//         shooter_gif.setVisible(true);
+		// shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			double x=e.getX()-80;
-			double y=e.getY()-80;
-			double[] curr=lawn.correct_layout(x,y);
-			sunflower_gif.setX(curr[0]-70);
-			sunflower_gif.setY(curr[1]-50);
+			double x = e.getX() - 80;
+			double y = e.getY() - 80;
+			double[] curr = lawn.correct_layout(x, y);
+			sunflower_gif.setX(curr[0] - 70);
+			sunflower_gif.setY(curr[1] - 50);
+			System.out.println(e.getSource());
+		}
+	}
+
+	@FXML
+	public void move_CherryBomb(MouseEvent e) {
+		// shooter_gif.setVisible(true);
+		if (isPlaced == false) {
+			double x = e.getX();
+			double y = e.getY();
+			double[] curr = lawn.correct_layout(x, y);
+			CherryBomb_gif.setX(x - 70);
+			CherryBomb_gif.setY(y - 50);
 			System.out.println(e.getSource());
 		}
 	}
 
 	@FXML
 	public void move_walnut(MouseEvent e) {
-		//         shooter_gif.setVisible(true);
+		// shooter_gif.setVisible(true);
 
 		if (isPlaced == false) {
-			double x=e.getX()-80;
-			double y=e.getY()-80;
-			double[] curr=lawn.correct_layout(x,y);
-//			if(x>)
+			double x = e.getX() - 80;
+			double y = e.getY() - 80;
+			double[] curr = lawn.correct_layout(x, y);
+			// if(x>)
 			walnut_gif.setX(curr[0]);
 			walnut_gif.setY(curr[1]);
-//			walnut_gif.setX(x);
-//			walnut_gif.setY(y);
-//			System.out.println((e.getX()-80)+" "+(e.getY() - 80));
+			// walnut_gif.setX(x);
+			// walnut_gif.setY(y);
+			// System.out.println((e.getX()-80)+" "+(e.getY() - 80));
 		}
-//		if(isPlaced==true){
-//			int lane=1;
-//			Walnut w=new Walnut()
-//		}
+		// if(isPlaced==true){
+		// int lane=1;
+		// Walnut w=new Walnut()
+		// }
 	}
-
 
 	@FXML
 	public void spawn_shooter(javafx.event.ActionEvent actionEvent) {
 		if (sunCount >= 100) {
-			pea_spawnable=true;
+			pea_spawnable = true;
 			Image i = new Image("shooter_gif.gif");
 			shooter_gif = new ImageView(i);
 			shooter_gif.setScaleX(0.5);
@@ -179,7 +194,7 @@ public class GameScreen extends Application implements Initializable{
 	@FXML
 	public void spawn_sunflower(javafx.event.ActionEvent actionEvent) {
 		if (sunCount >= 50) {
-			pea_spawnable=true;
+			pea_spawnable = true;
 			Image i = new Image("sunflower_gif.gif");
 			sunflower_gif = new ImageView(i);
 			sunflower_gif.setScaleX(0.5);
@@ -195,9 +210,27 @@ public class GameScreen extends Application implements Initializable{
 	}
 
 	@FXML
+	public void spawn_CherryBomb(javafx.event.ActionEvent actionEvent) {
+		if (sunCount >= 150) {
+			pea_spawnable = true;
+			Image i = new Image("CherryBomb_gif.gif");
+			CherryBomb_gif = new ImageView(i);
+			CherryBomb_gif.setScaleX(0.6);
+			CherryBomb_gif.setScaleY(0.6);
+			Anchor.getChildren().add(CherryBomb_gif);
+			sunCount = sunCount - 150;
+			sun.setText("" + sunCount);
+			checkOpacity();
+			curGif = 3;
+			isPlaced = false;
+			System.out.println(actionEvent.getSource());
+		}
+	}
+
+	@FXML
 	public void spawn_walnut(javafx.event.ActionEvent actionEvent) {
 		if (sunCount >= 50) {
-			pea_spawnable=true;
+			pea_spawnable = true;
 			Image i = new Image("walnut_gif.gif");
 			walnut_gif = new ImageView(i);
 			walnut_gif.setScaleX(0.7);
@@ -225,32 +258,49 @@ public class GameScreen extends Application implements Initializable{
 		} else {
 			sidebar_shooter.setOpacity(1);
 		}
-//		repeeater_img.setOpacity(0.5);
-//		cherry_img.setOpacity(0.5);
 
+		if (sunCount < 150) {
+			cherry_img.setOpacity(0.5);
+		} else {
+			cherry_img.setOpacity(1);
+		}
+		// repeeater_img.setOpacity(0.5);
+		// cherry_img.setOpacity(0.5);
 
 	}
 
-//	public void put(MouseEvent e) {
-//		isPlaced = true;
-//	}
+	// public void put(MouseEvent e) {
+	// isPlaced = true;
+	// }
 
 	public void FallingSun() {
-//		slider.setTranslateX(0);
+		// slider.setTranslateX(0);
 		moveSlider();
-//		this.setupTimeline();
+		// this.setupTimeline();
 	}
-//50,180,310,440,570
+
+	// 50,180,310,440,570
 	@FXML
 	public void inGameMenu(ActionEvent e) throws IOException {
-		Parent loader = FXMLLoader.load(getClass().getResource("P1.fxml"));//Creates a Parent called loader and assign it as ScReen2.FXML
+		Parent loader = FXMLLoader.load(getClass().getResource("P1.fxml"));// Creates
+																			// a
+																			// Parent
+																			// called
+																			// loader
+																			// and
+																			// assign
+																			// it
+																			// as
+																			// ScReen2.FXML
 
-		Scene scene = new Scene(loader); //This creates a new scene called scene and assigns it as the Sample.FXML document which was named "loader"
-		Stage app_stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+		Scene scene = new Scene(loader); // This creates a new scene called
+											// scene and assigns it as the
+											// Sample.FXML document which was
+											// named "loader"
+		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		app_stage.setScene(scene);
 		app_stage.show();
 	}
-
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -275,86 +325,78 @@ public class GameScreen extends Application implements Initializable{
 
 		translatorObj.play();
 	}
-	public void setupTimeline(){
-		KeyFrame kf= new KeyFrame(Duration.seconds(10),new TimeHandler());
-		Timeline timeline=new Timeline(kf);
+
+	public void setupTimeline() {
+		KeyFrame kf = new KeyFrame(Duration.seconds(10), new TimeHandler());
+		Timeline timeline = new Timeline(kf);
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
 	}
-	private class TimeHandler implements EventHandler<ActionEvent>{
-		public void handle(ActionEvent event){
-			Random r=new Random();
+
+	private class TimeHandler implements EventHandler<ActionEvent> {
+		public void handle(ActionEvent event) {
+			Random r = new Random();
 			Image i = new Image("falling_sun.jpg");
 			falling_sun = new ImageView(i);
-			falling_sun.setLayoutX(Math.abs(r.nextInt())%900);
+			falling_sun.setLayoutX(Math.abs(r.nextInt()) % 900);
 			falling_sun.setScaleY(0.5);
 			falling_sun.setScaleX(0.5);
 			falling_sun.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
 			Anchor.getChildren().add(falling_sun);
 
-			int c=Math.abs(r.nextInt());
-			c=c%5;
+			int c = Math.abs(r.nextInt());
+			c = c % 5;
 			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(3), falling_sun);
 			translatorObj.setToY(+y_coord[c]);
 			translatorObj.play();
 		}
 
 	}
+
 	EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent e) {
-			sunCount+=25;
-			sun.setText(""+sunCount);
-			Object i=e.getSource();
+			sunCount += 25;
+			sun.setText("" + sunCount);
+			Object i = e.getSource();
 
-//			ImageView i=e.getSource();
+			// ImageView i=e.getSource();
 			((ImageView) i).setVisible(false);
 		}
 	};
+
 	public void put(MouseEvent e) {
 		isPlaced = true;
-		if(curGif==0){
-			lawn.createObject(lawn.calcLane(shooter_gif.getY()),curGif,shooter_gif);
-		}
-		else if(curGif==1){
-			lawn.createObject(lawn.calcLane(sunflower_gif.getY()),curGif,sunflower_gif);
-		}
-		else if(curGif==2){
-			lawn.createObject(lawn.calcLane(walnut_gif.getY()),curGif,walnut_gif);
+		if (curGif == 0) {
+			lawn.createObject(lawn.calcLane(shooter_gif.getY()), curGif, shooter_gif);
+		} else if (curGif == 1) {
+			lawn.createObject(lawn.calcLane(sunflower_gif.getY()), curGif, sunflower_gif);
+		} else if (curGif == 2) {
+			lawn.createObject(lawn.calcLane(walnut_gif.getY()), curGif, walnut_gif);
 		}
 		lawn.displayChar();
-		if(pea_spawnable && curGif==0) {
+		if (pea_spawnable && curGif == 0) {
 			ImageView img = new Pea().getPea();
 			Anchor.getChildren().add(img);
 			img.setX(shooter_gif.getX()+120);
 			img.setY(shooter_gif.getY()+80);
-
 			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
 			translatorObj.setToX(1200);
 			translatorObj.setCycleCount(Animation.INDEFINITE);
 			translatorObj.play();
 			pea_spawnable = false;
 		}
-		Timeline t=new Timeline();
+		Timeline t = new Timeline();
 
 	}
+
 	@FXML
 	public void moveSlider() {
 
-		Timeline task = new Timeline(
-				new KeyFrame(
-						Duration.ZERO,
-						new KeyValue(slider.progressProperty(), 0)
-				),
-				new KeyFrame(
-						Duration.seconds(60),
-						new KeyValue(slider.progressProperty(), 1)
-				));
+		Timeline task = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(slider.progressProperty(), 0)),
+				new KeyFrame(Duration.seconds(60), new KeyValue(slider.progressProperty(), 1)));
 		task.playFromStart();
 	}
-
-
-
 
 }

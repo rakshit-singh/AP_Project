@@ -336,37 +336,4 @@ public class GameScreen extends Application implements Initializable{
 
 
 
-
-
-
-
-
-
-	final class Pea {
-
-		private boolean isexisting;
-		private ImageView Pea;
-
-		public Pea() {
-
-			this.Pea = new ImageView("Pea.png");
-			this.setIsexisting(false);
-		}
-
-		public ImageView getPea() {
-			return Pea;
-		}
-
-		public boolean isIsexisting() {
-			return isexisting;
-		}
-
-		public void setIsexisting(boolean isexisting) {
-			this.isexisting = isexisting;
-		}
-
-	}
-
-
-
 }

@@ -28,6 +28,14 @@ class Lawn{
         activeChars.remove(c);
     }
 
+    public ArrayList<Character> getActiveChars() {
+        return activeChars;
+    }
+
+    public void setActiveChars(ArrayList<Character> activeChars) {
+        this.activeChars = activeChars;
+    }
+
     public double[] getX_coord() {
         return x_coord;
     }

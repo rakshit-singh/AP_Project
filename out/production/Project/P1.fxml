@@ -18,7 +18,7 @@
 				<Rectangle2D />
 			</viewport>
 		</ImageView>
-		<Button layoutX="1026.0" layoutY="358.0" mnemonicParsing="false" onAction="#startGame" prefHeight="90.0" prefWidth="256.0" text="RESUME" textAlignment="CENTER" textFill="#723c3c">
+		<Button id="resumeButton" fx:id="resumeButton" layoutX="1026.0" layoutY="358.0" mnemonicParsing="false" onAction="#startGame" prefHeight="90.0" prefWidth="256.0" text="RESUME" textAlignment="CENTER" textFill="#723c3c">
 			<font>
 				<Font name="Times New Roman Bold" size="39.0" />
 			</font>

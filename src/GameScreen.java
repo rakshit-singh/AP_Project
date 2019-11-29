@@ -22,13 +22,15 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
-import java.util.Random;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 //<<<<<<< HEAD
 
 public class GameScreen extends Application implements Initializable {
+	private ArrayList<TranslateTransition> translators=new ArrayList<>();
+	public Button menu;
+	private boolean isPaused;
+	private boolean blank_click;
+	private Stage primaryStage2;
 	@FXML
 	private Button shooter_button;
 	@FXML
@@ -61,7 +63,6 @@ public class GameScreen extends Application implements Initializable {
 	public ImageView CherryBomb_gif;
 
 	public Lawn lawn = new Lawn();
-	private int[] y_coord = { 50, 180, 310, 420, 540 };
 	@FXML
 	public ProgressBar slider;
 	private boolean isPlaced = false;
@@ -147,8 +148,8 @@ public class GameScreen extends Application implements Initializable {
 			double x = e.getX();
 			double y = e.getY();
 			double[] curr = lawn.correct_layout(x, y);
-			CherryBomb_gif.setX(x - 70);
-			CherryBomb_gif.setY(y - 50);
+			CherryBomb_gif.setX(curr[0] - 70);
+			CherryBomb_gif.setY(curr[1] - 50);
 			System.out.println(e.getSource());
 		}
 	}
@@ -187,6 +188,7 @@ public class GameScreen extends Application implements Initializable {
 			sun.setText("" + sunCount);
 			curGif = 0;
 			isPlaced = false;
+			blank_click=false;
 			System.out.println(actionEvent.getSource());
 		}
 	}
@@ -276,35 +278,34 @@ public class GameScreen extends Application implements Initializable {
 	public void FallingSun() {
 		// slider.setTranslateX(0);
 		moveSlider();
-		// this.setupTimeline();
+		this.setupTimeline();
 	}
 
 	// 50,180,310,440,570
 	@FXML
-	public void inGameMenu(ActionEvent e) throws IOException {
-		Parent loader = FXMLLoader.load(getClass().getResource("P1.fxml"));// Creates
-																			// a
-																			// Parent
-																			// called
-																			// loader
-																			// and
-																			// assign
-																			// it
-																			// as
-																			// ScReen2.FXML
-
-		Scene scene = new Scene(loader); // This creates a new scene called
-											// scene and assigns it as the
-											// Sample.FXML document which was
-											// named "loader"
-		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-		app_stage.setScene(scene);
-		app_stage.show();
+	public void inGameMenu(ActionEvent e) throws IOException, InterruptedException {
+		if(!isPaused) {
+			for (TranslateTransition i : translators) {
+				i.pause();
+			}
+			isPaused = true;
+			primaryStage2 = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("P1.fxml"));
+			Scene scene = new Scene(root);
+			this.primaryStage2.setTitle("Pause Screen");
+			this.primaryStage2.setScene(scene);
+			this.primaryStage2.showAndWait();
+			for (TranslateTransition i : translators) {
+				i.play();
+			}
+			isPaused = false;
+		}
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(38), zombie_gif);
+		translators.add(translatorObj);
 		// translatorObj.setDuration(Duration.seconds(10));
 		translatorObj.setToX(-880);
 		translatorObj.setAutoReverse(true);
@@ -316,6 +317,7 @@ public class GameScreen extends Application implements Initializable {
 	@FXML
 	public void movelawnmover() {
 		TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(10), lawnmower);
+		translators.add(translatorObj);
 		// translatorObj.setDuration(Duration.seconds(10));
 		translatorObj.setToX(1200);
 		// translatorObj.setAutoReverse(true);
@@ -327,29 +329,33 @@ public class GameScreen extends Application implements Initializable {
 	}
 
 	public void setupTimeline() {
-		KeyFrame kf = new KeyFrame(Duration.seconds(10), new TimeHandler());
+		KeyFrame kf = new KeyFrame(Duration.seconds(20), new TimeHandler());
 		Timeline timeline = new Timeline(kf);
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
+//		System.out.println(1);
 	}
 
 	private class TimeHandler implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent event) {
 			Random r = new Random();
-			Image i = new Image("falling_sun.jpg");
-			falling_sun = new ImageView(i);
-			falling_sun.setLayoutX(Math.abs(r.nextInt()) % 900);
-			falling_sun.setScaleY(0.5);
-			falling_sun.setScaleX(0.5);
-			falling_sun.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+			if(!isPaused) {
+				Image i = new Image("falling_sun.jpg");
+				falling_sun = new ImageView(i);
+				falling_sun.setLayoutX(Math.abs(r.nextInt()) % 900);
+				falling_sun.setScaleY(0.5);
+				falling_sun.setScaleX(0.5);
+				falling_sun.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
-			Anchor.getChildren().add(falling_sun);
+				Anchor.getChildren().add(falling_sun);
 
-			int c = Math.abs(r.nextInt());
-			c = c % 5;
-			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(3), falling_sun);
-			translatorObj.setToY(+y_coord[c]);
-			translatorObj.play();
+				int c = Math.abs(r.nextInt());
+				c = c % 5;
+				TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), falling_sun);
+				translators.add(translatorObj);
+				translatorObj.setToY(+(lawn.getY_coord())[c]);
+				translatorObj.play();
+			}
 		}
 
 	}
@@ -357,31 +363,41 @@ public class GameScreen extends Application implements Initializable {
 	EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent e) {
-			sunCount += 25;
-			sun.setText("" + sunCount);
-			Object i = e.getSource();
+			if(!isPaused) {
+				sunCount += 25;
+				sun.setText("" + sunCount);
+				Object i = e.getSource();
 
-			// ImageView i=e.getSource();
-			((ImageView) i).setVisible(false);
+				// ImageView i=e.getSource();
+				((ImageView) i).setVisible(false);
+			}
 		}
 	};
 
 	public void put(MouseEvent e) {
 		isPlaced = true;
-		if (curGif == 0) {
-			lawn.createObject(lawn.calcLane(shooter_gif.getY()), curGif, shooter_gif);
-		} else if (curGif == 1) {
-			lawn.createObject(lawn.calcLane(sunflower_gif.getY()), curGif, sunflower_gif);
-		} else if (curGif == 2) {
-			lawn.createObject(lawn.calcLane(walnut_gif.getY()), curGif, walnut_gif);
+		if(!blank_click) {
+			if (curGif == 0) {
+				System.out.println(shooter_gif.getY());
+				lawn.createObject(lawn.calcLane(shooter_gif.getY()+50), curGif, shooter_gif);
+			} else if (curGif == 1) {
+				lawn.createObject(lawn.calcLane(sunflower_gif.getY()+50), curGif, sunflower_gif);
+			} else if (curGif == 2) {
+				lawn.createObject(lawn.calcLane(walnut_gif.getY()), curGif, walnut_gif);
+			} else if (curGif == 3) {
+				lawn.createObject(lawn.calcLane(CherryBomb_gif.getY()+50), curGif, CherryBomb_gif);
+			}
+			blank_click=true;
 		}
 		lawn.displayChar();
+		System.out.println(lawn.getActiveChars().size());
 		if (pea_spawnable && curGif == 0) {
 			ImageView img = new Pea().getPea();
 			Anchor.getChildren().add(img);
 			img.setX(shooter_gif.getX()+120);
 			img.setY(shooter_gif.getY()+80);
 			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
+			translators.add(translatorObj);
 			translatorObj.setToX(1200);
 			translatorObj.setCycleCount(Animation.INDEFINITE);
 			translatorObj.play();

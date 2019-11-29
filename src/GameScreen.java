@@ -58,9 +58,9 @@ public class GameScreen extends Application implements Initializable{
 	@FXML
 	public ImageView falling_sun;
 
+
+	public Lawn lawn=new Lawn();
 	private int[] y_coord={50,180,310,420,540};
-
-
 	@FXML
 	public ProgressBar slider;
 	private boolean isPlaced = false;
@@ -105,8 +105,11 @@ public class GameScreen extends Application implements Initializable{
 	public void move_shooter(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			shooter_gif.setX(e.getX() - 80);
-			shooter_gif.setY(e.getY()- 80);
+			double x=e.getX()-80;
+			double y=e.getY()-80;
+			double[] curr=lawn.correct_layout(x,y);
+			shooter_gif.setX(curr[0]-70);
+			shooter_gif.setY(curr[1]-50);
 			System.out.println(e.getSource());
 		}
 	}
@@ -125,8 +128,11 @@ public class GameScreen extends Application implements Initializable{
 	public void move_sunflower(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
 		if (isPlaced == false) {
-			sunflower_gif.setX(e.getX() - 80);
-			sunflower_gif.setY(e.getY() - 80);
+			double x=e.getX()-80;
+			double y=e.getY()-80;
+			double[] curr=lawn.correct_layout(x,y);
+			sunflower_gif.setX(curr[0]-70);
+			sunflower_gif.setY(curr[1]-50);
 			System.out.println(e.getSource());
 		}
 	}
@@ -134,11 +140,22 @@ public class GameScreen extends Application implements Initializable{
 	@FXML
 	public void move_walnut(MouseEvent e) {
 		//         shooter_gif.setVisible(true);
+
 		if (isPlaced == false) {
-			walnut_gif.setX(e.getX() - 80);
-			walnut_gif.setY(e.getY() - 80);
-			System.out.println(e.getSource());
+			double x=e.getX()-80;
+			double y=e.getY()-80;
+			double[] curr=lawn.correct_layout(x,y);
+//			if(x>)
+			walnut_gif.setX(curr[0]);
+			walnut_gif.setY(curr[1]);
+//			walnut_gif.setX(x);
+//			walnut_gif.setY(y);
+//			System.out.println((e.getX()-80)+" "+(e.getY() - 80));
 		}
+//		if(isPlaced==true){
+//			int lane=1;
+//			Walnut w=new Walnut()
+//		}
 	}
 
 
@@ -224,7 +241,7 @@ public class GameScreen extends Application implements Initializable{
 	public void FallingSun() {
 //		slider.setTranslateX(0);
 		moveSlider();
-		this.setupTimeline();
+//		this.setupTimeline();
 	}
 //50,180,310,440,570
 	@FXML
@@ -300,6 +317,7 @@ public class GameScreen extends Application implements Initializable{
 	};
 	public void put(MouseEvent e) {
 		isPlaced = true;
+
 		if(pea_spawnable && curGif==0) {
 			ImageView img = new Pea().getPea();
 			Anchor.getChildren().add(img);

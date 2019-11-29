@@ -34,10 +34,10 @@ import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 public class GameScreen extends Application {
 	private ArrayList<TranslateTransition> translators=new ArrayList<>();
 	public Button menu;
-	private boolean isPaused;
-	private boolean blank_click;
+	private boolean isPaused=false;
+	private boolean blank_click=true;
 	private Stage primaryStage2;
-
+	private ImageView sunflower_sun;
 	@FXML
 	private Button shooter_button;
 	@FXML
@@ -219,6 +219,8 @@ public class GameScreen extends Application {
 			checkOpacity();
 			curGif = 1;
 			isPlaced = false;
+			blank_click=false;
+
 			System.out.println(actionEvent.getSource());
 		}
 	}
@@ -237,6 +239,7 @@ public class GameScreen extends Application {
 			checkOpacity();
 			curGif = 3;
 			isPlaced = false;
+			blank_click=false;
 			System.out.println(actionEvent.getSource());
 		}
 	}
@@ -291,6 +294,7 @@ public class GameScreen extends Application {
 		slider.setTranslateX(0);
 		moveSlider();
 		this.setupTimeline();
+		setupSunflowerSunTimeline();
 	}
 
 	// 50,180,310,440,570
@@ -406,7 +410,6 @@ public class GameScreen extends Application {
 				falling_sun.setScaleY(0.5);
 				falling_sun.setScaleX(0.5);
 				falling_sun.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-
 				Anchor.getChildren().add(falling_sun);
 
 				int c = Math.abs(r.nextInt());
@@ -442,6 +445,7 @@ public class GameScreen extends Application {
 				System.out.println(shooter_gif.getY());
 				lawn.createObject(lawn.calcLane(shooter_gif.getY()+50), curGif, shooter_gif);
 			} else if (curGif == 1) {
+
 				lawn.createObject(lawn.calcLane(sunflower_gif.getY()+50), curGif, sunflower_gif);
 			} else if (curGif == 2) {
 				lawn.createObject(lawn.calcLane(walnut_gif.getY()), curGif, walnut_gif);
@@ -475,5 +479,61 @@ public class GameScreen extends Application {
 				new KeyFrame(Duration.seconds(60), new KeyValue(slider.progressProperty(), 1)));
 		task.playFromStart();
 	}
+	public void giveSun(ImageView image) {
+		if (!isPaused) {
+			Image i = new Image("falling_sun.jpg");
+			falling_sun = new ImageView(i);
+//			falling_sun.setLayoutX(Math.abs(r.nextInt()) % 900);
+
+			falling_sun.setScaleY(0.5);
+			falling_sun.setScaleX(0.5);
+
+		}
+	}
+		private class SunflowerHandler implements EventHandler<ActionEvent> {
+
+			public void handle(ActionEvent event) {
+//				Random r = new Random();
+
+				if(!isPaused) {
+//					ArrayList<ImageView> a=new ArrayList<>();
+					Image i = new Image("falling_sun.jpg");
+
+//					sunflower_sun.setLayoutX(sunflower_gif.getX());
+//					sunflower_sun.setLayoutY(sunflower_gif.getY());
+					for(Character p:lawn.getActiveChars()){
+						if(p instanceof Sunflower){
+							sunflower_sun = new ImageView(i);
+							sunflower_sun.setLayoutX((p.getPosition())[0]);
+							sunflower_sun.setLayoutY((p.getPosition())[1]);
+							sunflower_sun.setScaleY(0.5);
+							sunflower_sun.setScaleX(0.5);
+							sunflower_sun.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+							Anchor.getChildren().add(sunflower_sun);
+
+//					int c = Math.abs(r.nextInt());
+//					c = c % 5;
+							TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(1), sunflower_sun);
+							translators.add(translatorObj);
+							translatorObj.setToY(sunflower_sun.getY()+45);
+							translatorObj.play();
+//							a.add(sunflower_sun);
+						}
+					}
+
+
+
+
+				}
+
+			}
+
+		}
+		public void setupSunflowerSunTimeline(){
+			KeyFrame kf = new KeyFrame(Duration.seconds(5), new SunflowerHandler());
+			Timeline timeline = new Timeline(kf);
+			timeline.setCycleCount(Animation.INDEFINITE);
+			timeline.play();
+		}
 
 }

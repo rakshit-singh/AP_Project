@@ -1,14 +1,26 @@
+import javafx.scene.image.ImageView;
+
 public class Character {
     protected boolean exists;
     protected float health;
     protected final int lane;
     protected int[] position;
+    protected ImageView image;
 
-    public Character(float health,int lane, int[] position) {
+    public Character(float health,int lane, int[] position,ImageView image) {
         this.exists = true;
         this.health = health;
         this.lane = lane;
         this.position = position;
+        this.image=image;
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
+
+    public void setImage(ImageView image) {
+        this.image = image;
     }
 
     public boolean isExists() {

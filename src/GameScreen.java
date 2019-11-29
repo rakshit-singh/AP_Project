@@ -163,8 +163,6 @@ public class GameScreen extends Application implements Initializable{
 	public void spawn_shooter(javafx.event.ActionEvent actionEvent) {
 		if (sunCount >= 100) {
 			pea_spawnable=true;
-
-
 			Image i = new Image("shooter_gif.gif");
 			shooter_gif = new ImageView(i);
 			shooter_gif.setScaleX(0.5);
@@ -174,7 +172,6 @@ public class GameScreen extends Application implements Initializable{
 			sun.setText("" + sunCount);
 			curGif = 0;
 			isPlaced = false;
-
 			System.out.println(actionEvent.getSource());
 		}
 	}
@@ -317,7 +314,16 @@ public class GameScreen extends Application implements Initializable{
 	};
 	public void put(MouseEvent e) {
 		isPlaced = true;
-
+		if(curGif==0){
+			lawn.createObject(lawn.calcLane(shooter_gif.getY()),curGif,shooter_gif);
+		}
+		else if(curGif==1){
+			lawn.createObject(lawn.calcLane(sunflower_gif.getY()),curGif,sunflower_gif);
+		}
+		else if(curGif==2){
+			lawn.createObject(lawn.calcLane(walnut_gif.getY()),curGif,walnut_gif);
+		}
+		lawn.displayChar();
 		if(pea_spawnable && curGif==0) {
 			ImageView img = new Pea().getPea();
 			Anchor.getChildren().add(img);

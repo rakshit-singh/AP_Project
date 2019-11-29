@@ -4,10 +4,10 @@ public class Character {
     protected boolean exists;
     protected float health;
     protected final int lane;
-    protected int[] position;
+    protected double[] position;
     protected ImageView image;
 
-    public Character(float health,int lane, int[] position,ImageView image) {
+    public Character(float health,int lane, double[] position,ImageView image) {
         this.exists = true;
         this.health = health;
         this.lane = lane;
@@ -43,11 +43,11 @@ public class Character {
         return lane;
     }
 
-    public int[] getPosition() {
+    public double[] getPosition() {
         return position;
     }
 
-    public void setPosition(int[] position) {
+    public void setPosition(double[] position) {
         this.position = position;
     }
 }

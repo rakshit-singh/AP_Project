@@ -1,3 +1,6 @@
+//import javax.swing.text.html.ImageView;
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 public class Level {
 }
@@ -73,6 +76,44 @@ class Lawn{
         }
         double[] arr={x,y};
         return arr;
+    }
+    public void createObject(int lane,int num, ImageView image){
+        double[] pos={image.getX(),image.getY()};
+        if(num==0){
+            Plant s=new Shooter(lane,pos,image);
+            activeChars.add(s);
+        }
+        else if(num==1){
+            Plant s=new Sunflower(lane,pos,image);
+            activeChars.add(s);
+        }
+        else if(num==2){
+            Plant s=new Walnut(lane,pos,image);
+            activeChars.add(s);
+        }
+        else if(num==3){
+
+            Plant s=new Cherrybomb(lane,pos,image);
+            activeChars.add(s);
+        }
+        else if(num==4){
+            Plant s=new Repeater(lane,pos,image);
+            activeChars.add(s);
+        }
+    }
+    public int calcLane(double y){
+        int c=0;
+        for(int i=0;i<y_coord.length;i++){
+            if(y==y_coord[i]){
+                c=i;
+            }
+        }
+        return c;
+    }
+    public void displayChar(){
+        for(Character s: activeChars){
+            System.out.println(s+"  lane= "+s.getLane());
+        }
     }
 
 //    public

@@ -5,10 +5,10 @@ interface Attacker{
 }
 
 
-public abstract class Plant extends Character {
+public class Plant extends Character {
     final protected int sunsReq;
     final protected int waitingTime;
-    public Plant(float health, int lane, int[] position,int sunsReq,int waitingTime,ImageView image) {
+    public Plant(float health, int lane, double[] position,int sunsReq,int waitingTime,ImageView image) {
         super(health, lane, position,image);
         this.waitingTime=waitingTime;
         this.sunsReq=sunsReq;
@@ -26,7 +26,7 @@ public abstract class Plant extends Character {
 
 class Shooter extends Plant implements Attacker{
     private boolean canAttack;
-    public Shooter(int lane, int[] position,ImageView image) {
+    public Shooter(int lane, double[] position,ImageView image) {
         super(100, lane, position, 100, 5,image);
     }
 
@@ -53,7 +53,7 @@ class Shooter extends Plant implements Attacker{
 }
 class Repeater extends Plant implements  Attacker{
     private boolean canAttack;
-    public Repeater(int lane, int[] position,ImageView image) {
+    public Repeater(int lane, double[] position,ImageView image) {
         super(100, lane, position, 200, 8,image);
     }
 
@@ -79,21 +79,21 @@ class Repeater extends Plant implements  Attacker{
 }
 class Walnut extends Plant{
     final float defenseVal;
-    public Walnut(int lane, int[] position,ImageView image) {
+    public Walnut(int lane, double[] position,ImageView image) {
         super(400, lane, position, 50, 5,image);
         defenseVal=50;
     }
 }
 class Sunflower extends  Plant{
     final float sunRate;
-    public Sunflower(int lane, int[] position,ImageView image) {
+    public Sunflower(int lane, double[] position,ImageView image) {
         super(100, lane, position, 50, 5,image);
         sunRate=1;
     }
 
 }
 class Cherrybomb extends Plant implements Attacker{
-    public Cherrybomb(int lane, int[] position,ImageView image) {
+    public Cherrybomb(int lane, double[] position,ImageView image) {
         super(100, lane, position, 150, 8,image);
     }
 

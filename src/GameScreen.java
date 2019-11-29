@@ -217,8 +217,8 @@ public class GameScreen extends Application implements Initializable {
 			pea_spawnable = true;
 			Image i = new Image("CherryBomb_gif.gif");
 			CherryBomb_gif = new ImageView(i);
-			CherryBomb_gif.setScaleX(0.6);
-			CherryBomb_gif.setScaleY(0.6);
+			CherryBomb_gif.setScaleX(0.4);
+			CherryBomb_gif.setScaleY(0.4);
 			Anchor.getChildren().add(CherryBomb_gif);
 			sunCount = sunCount - 150;
 			sun.setText("" + sunCount);

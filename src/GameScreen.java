@@ -327,11 +327,8 @@ public class GameScreen extends Application implements Initializable{
 		if(pea_spawnable && curGif==0) {
 			ImageView img = new Pea().getPea();
 			Anchor.getChildren().add(img);
-			img.setX(e.getX()+100);
-			img.setY(e.getY()+80);
-
-			img.setX(e.getX() + 20.5);
-			img.setY(e.getY() - 3);
+			img.setX(shooter_gif.getX()+120);
+			img.setY(shooter_gif.getY()+80);
 
 			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
 			translatorObj.setToX(1200);

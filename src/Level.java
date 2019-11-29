@@ -1,14 +1,24 @@
+
 //import javax.swing.text.html.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.sun.xml.internal.bind.v2.runtime.output.ForkXmlOutput;
+
 public class Level {
 }
 
+
 class Lawn{
     private ArrayList<Character> activeChars;
+    private static double zombie_start_point = 887;// X Coordinate for spawning the zombies
     private double[] y_coord={100,200,330,440,550};
     private double[] x_coord={232,306,382,462,539,615,685,756,835};
+    private double[] spawn_points = { 44, 163, 290, 401, 526 };// Y Coordinates for spawning the zombies
+    
     public Lawn(){
         activeChars=new ArrayList<>();
     }
@@ -19,7 +29,11 @@ class Lawn{
     public double[] getY_coord() {
         return y_coord;
     }
-
+    
+    public double[] getSpawn_points() {
+		return spawn_points;
+	}
+    
     public void setY_coord(double[] y_coord) {
         this.y_coord = y_coord;
     }
@@ -109,6 +123,32 @@ class Lawn{
             activeChars.add(s);
         }
     }
+    
+ // Adds the zombies to active characters
+ 	public void SpawnZombies(int type, int lane, ImageView image) {
+ 		if (type == 0) {
+ 			double y = spawn_points[lane];
+ 			double[] arr = { 0.0, y };
+ 			Zombie z = new BasicZombie(lane, arr, image);
+ 			activeChars.add(z);
+ 		} else if (type == 1) {
+ 			double y = spawn_points[lane];
+ 			double[] arr = { 0.0, y };
+ 			Zombie z = new ConeZombie(lane, arr, image);
+ 			activeChars.add(z);
+ 		} else if (type == 2) {
+ 			double y = spawn_points[lane];
+ 			double[] arr = { 0.0, y};
+ 			Zombie z = new BucketZombie(lane, arr, image);
+ 			activeChars.add(z);
+ 		} else if (type == 3) {
+ 			double y = spawn_points[lane];
+ 			double[] arr = { 0.0, y };
+ 			Zombie z = new JavelinZombie(lane, arr, image);
+ 			activeChars.add(z);
+ 		}
+ 	}
+ 	
     public int calcLane(double y){
         int c=0;
         for(int i=0;i<y_coord.length;i++){

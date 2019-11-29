@@ -22,15 +22,22 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
-import java.util.*;
-//<<<<<<< HEAD
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class GameScreen extends Application implements Initializable {
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
+
+public class GameScreen extends Application {
 	private ArrayList<TranslateTransition> translators=new ArrayList<>();
 	public Button menu;
 	private boolean isPaused;
 	private boolean blank_click;
 	private Stage primaryStage2;
+
 	@FXML
 	private Button shooter_button;
 	@FXML
@@ -51,8 +58,8 @@ public class GameScreen extends Application implements Initializable {
 	public ImageView sidebar_walnut;
 	@FXML
 	public javafx.scene.control.Label sun;
-	@FXML
-	public ImageView zombie_gif;
+	// @FXML
+	// public ImageView zombie_gif;
 	@FXML
 	public ImageView cherry_img;
 	@FXML
@@ -63,6 +70,11 @@ public class GameScreen extends Application implements Initializable {
 	public ImageView CherryBomb_gif;
 
 	public Lawn lawn = new Lawn();
+
+	private int[] y_coord = { 50, 180, 310, 420, 540 };
+
+	private double lastrun = 0.0;
+
 	@FXML
 	public ProgressBar slider;
 	private boolean isPlaced = false;
@@ -276,7 +288,7 @@ public class GameScreen extends Application implements Initializable {
 	// }
 
 	public void FallingSun() {
-		// slider.setTranslateX(0);
+		slider.setTranslateX(0);
 		moveSlider();
 		this.setupTimeline();
 	}
@@ -302,17 +314,26 @@ public class GameScreen extends Application implements Initializable {
 		}
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(38), zombie_gif);
-		translators.add(translatorObj);
-		// translatorObj.setDuration(Duration.seconds(10));
-		translatorObj.setToX(-880);
-		translatorObj.setAutoReverse(true);
-		// translatorObj.setCycleCount(Animation.INDEFINITE);
+	// @Override
+	// public void initialize(URL location, ResourceBundle resources) {
+	// TranslateTransition translatorObj = new
+	// TranslateTransition(Duration.seconds(38), zombie_gif);
+	// translatorObj.setToX(-880);
+	// translatorObj.setAutoReverse(true);
+	// translatorObj.play();
+	// }
 
-		translatorObj.play();
-	}
+//	@Override
+//	public void initialize(URL location, ResourceBundle resources) {
+//		TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(38), zombie_gif);
+//		translators.add(translatorObj);
+//		// translatorObj.setDuration(Duration.seconds(10));
+//		translatorObj.setToX(-880);
+//		translatorObj.setAutoReverse(true);
+//		// translatorObj.setCycleCount(Animation.INDEFINITE);
+//
+//		translatorObj.play();
+//	}
 
 	@FXML
 	public void movelawnmover() {
@@ -331,14 +352,53 @@ public class GameScreen extends Application implements Initializable {
 	public void setupTimeline() {
 		KeyFrame kf = new KeyFrame(Duration.seconds(20), new TimeHandler());
 		Timeline timeline = new Timeline(kf);
+
+		KeyFrame kfz = new KeyFrame(Duration.seconds(20), new ZombieTimeHandler());
+		Timeline timelinezombies = new Timeline(kfz);
+
+		timelinezombies.setCycleCount(Animation.INDEFINITE);
 		timeline.setCycleCount(Animation.INDEFINITE);
+		timelinezombies.play();
 		timeline.play();
 //		System.out.println(1);
 	}
 
+	private class ZombieTimeHandler implements EventHandler<ActionEvent> {
+
+		private ImageView getZombiegif(int type) {
+			if (type == 0) {
+				return new ImageView("zombie_normal.gif");
+			} else {
+				return new ImageView("Conehead_Zombie.gif");
+			}
+		}
+
+		public void handle(ActionEvent event) {
+			if (System.currentTimeMillis() - lastrun > 12000) {
+				lastrun = System.currentTimeMillis();
+				Random r = new Random();
+				int lane = r.nextInt(5);
+				int zombie_type = r.nextInt(2);// TODO -> change to 4
+
+				ImageView im = getZombiegif(zombie_type);
+				lawn.SpawnZombies(zombie_type, lane, im);
+				im.setLayoutX(887);
+				im.setLayoutY(lawn.getSpawn_points()[lane]);
+				Anchor.getChildren().add(im);
+
+				TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(38), im);
+				translatorObj.setToX(-880);
+				translatorObj.setAutoReverse(true);
+				translatorObj.play();
+			}
+		}
+	}
+
 	private class TimeHandler implements EventHandler<ActionEvent> {
+
 		public void handle(ActionEvent event) {
 			Random r = new Random();
+
 			if(!isPaused) {
 				Image i = new Image("falling_sun.jpg");
 				falling_sun = new ImageView(i);
@@ -356,6 +416,7 @@ public class GameScreen extends Application implements Initializable {
 				translatorObj.setToY(+(lawn.getY_coord())[c]);
 				translatorObj.play();
 			}
+
 		}
 
 	}

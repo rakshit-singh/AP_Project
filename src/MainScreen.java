@@ -41,7 +41,7 @@ public class MainScreen extends Application {
 //        this.primaryStage.close();
     }
     @FXML
-    public void PlayControl(ActionEvent event) throws Exception {
+    public void ChooseControl(ActionEvent event) throws Exception {
 
         Parent loader = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));//Creates a Parent called loader and assign it as ScReen2.FXML
 
@@ -49,6 +49,16 @@ public class MainScreen extends Application {
         Stage app_stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         app_stage.setScene(scene);
 
+        app_stage.show();
+    }
+    @FXML
+    public void PlayControl(ActionEvent event) throws Exception {
+
+        Parent loader = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));//Creates a Parent called loader and assign it as ScReen2.FXML
+
+        Scene scene = new Scene(loader); //This creates a new scene called scene and assigns it as the Sample.FXML document which was named "loader"
+        Stage app_stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        app_stage.setScene(scene);
         app_stage.show();
     }
     @FXML

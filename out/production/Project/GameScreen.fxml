@@ -57,7 +57,7 @@
             <Image url="@sun.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="sun" layoutX="186.0" layoutY="9.0" prefHeight="30.0" prefWidth="74.0" text="200">
+      <Label fx:id="sun" layoutX="186.0" layoutY="9.0" prefHeight="30.0" prefWidth="74.0" text="0">
          <font>
             <Font name="Times New Roman Bold" size="23.0" />
          </font>

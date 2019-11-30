@@ -19,8 +19,32 @@ class Lawn{
     private double[] x_coord={232,306,382,462,539,615,685,756,835};
     private double[] spawn_points = { 44, 163, 290, 401, 526 };// Y Coordinates for spawning the zombies
     private  ArrayList<Zombie>zombie_arr=new ArrayList<>();
-    public Lawn(){
+    private ArrayList<LawnMower> lawnMowers=new ArrayList<>();
+
+    public ArrayList<LawnMower> getLawnMowers() {
+        return lawnMowers;
+    }
+
+    public void setLawnMowers(ArrayList<LawnMower> lawnMowers) {
+        this.lawnMowers = lawnMowers;
+    }
+
+    public Lawn() throws CloneNotSupportedException {
         activeChars=new ArrayList<>();
+        lawnMowers=new ArrayList<>();
+        double[] arr={0,0};
+        LawnMower l1=new LawnMower(1000,0,arr,new ImageView());
+        LawnMower l2=(LawnMower) l1.clone();
+        LawnMower l3=(LawnMower) l1.clone();
+        LawnMower l4=(LawnMower) l1.clone();
+        LawnMower l5=(LawnMower) l1.clone();
+
+        lawnMowers.add(l1);
+        lawnMowers.add(l2);
+        lawnMowers.add(l3);
+        lawnMowers.add(l4);
+        lawnMowers.add(l5);
+
     }
     public void addCharacter(Character c){
         activeChars.add(c);
@@ -153,6 +177,14 @@ class Lawn{
 
         }
         return null;
+    }
+    public void removeDeadZombies(){
+        for(int i=0;i<activeChars.size();i++){
+            if(!activeChars.get(i).isExists()){
+                activeChars.remove(i);
+                zombie_arr.remove(i);
+            }
+        }
     }
     
  // Adds the zombies to active characters

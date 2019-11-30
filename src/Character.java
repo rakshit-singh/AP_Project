@@ -1,6 +1,6 @@
 import javafx.scene.image.ImageView;
 
-public class Character {
+public class Character implements Cloneable {
     protected boolean exists;
     protected float health;
     protected final int lane;
@@ -13,6 +13,11 @@ public class Character {
         this.lane = lane;
         this.position = position;
         this.image=image;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return (Character)super.clone();
     }
 
     public ImageView getImage() {

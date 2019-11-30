@@ -26,20 +26,14 @@ public class Plant extends Character {
 }
 
 class Shooter extends Plant implements Attacker,Defend{
-    private boolean canAttack;
+    private Zombie current;
     private Pea mypea;
     public Shooter(int lane, double[] position,ImageView image) {
         super(100, lane, position, 100, 5,image);
         mypea=new Pea();
+        current=null;
     }
 
-    public boolean isCanAttack() {
-        return canAttack;
-    }
-
-    public void setCanAttack(boolean canAttack) {
-        this.canAttack = canAttack;
-    }
 
     public Pea getMypea() {
         return mypea;
@@ -49,15 +43,16 @@ class Shooter extends Plant implements Attacker,Defend{
         this.mypea = mypea;
     }
 
-    @Override
-    public void attack() {
-        if(canAttack){
-            shoot(this);
-
-        }
-    }
     public void shoot(Shooter s){
         Pea p=new Pea();
+    }
+
+    public Zombie getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Zombie current) {
+        this.current = current;
     }
 
     @Override
@@ -70,6 +65,11 @@ class Shooter extends Plant implements Attacker,Defend{
             this.mypea.getPea().setVisible(false);
             this.setExists(false);
         }
+    }
+
+    @Override
+    public void attack() {
+
     }
 }
 class Repeater extends Plant implements  Attacker {

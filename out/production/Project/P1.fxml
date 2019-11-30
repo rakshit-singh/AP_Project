@@ -31,7 +31,7 @@
 				<Font name="Times New Roman Bold" size="39.0" />
 			</font>
 		</Button>
-		<Button layoutX="1026.0" layoutY="604.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="256.0" text="EXIT" textFill="#833838">
+		<Button layoutX="1026.0" layoutY="604.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="82.0" prefWidth="256.0" text="EXIT" textFill="#833838">
 			<font>
 				<Font name="Times New Roman Bold" size="39.0" />
 			</font>

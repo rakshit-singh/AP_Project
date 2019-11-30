@@ -44,28 +44,33 @@ public class PauseScreen extends Application {
 		// do what you have to do
 		stage.close();
 	}
-
+	
 	@FXML
-	public void SaveState(GameScreen1 game) throws IOException {
-
-		ObjectOutputStream out = null;
-
-		for (Zombie z : game.lawn.getZombie_arr()) {
-			System.out.println("Zombie c " + z.getImage().getX() + " " + z.position[0]);
-			z.position[0] = z.getImage().getX();
-			System.out.println("Zombie u " + z.position[0]);
-		}
-		try {
-
-			out = new ObjectOutputStream(new FileOutputStream("out.txt"));
-			out.writeObject(game.lawn);
-			System.out.println("Save Done");
-		} finally {
-			if (out != null) {
-				out.close();
-			}
-		}
-
+	public void exitGame(){
+		System.exit(0);
 	}
+	
+//	@FXML
+//	public void SaveState(GameScreen1 game) throws IOException {
+//
+//		ObjectOutputStream out = null;
+//
+//		for (Zombie z : game.lawn.getZombie_arr()) {
+//			System.out.println("Zombie c " + z.getImage().getX() + " " + z.position[0]);
+//			z.position[0] = z.getImage().getX();
+//			System.out.println("Zombie u " + z.position[0]);
+//		}
+//		try {
+//
+//			out = new ObjectOutputStream(new FileOutputStream("out.txt"));
+//			out.writeObject(game.lawn);
+//			System.out.println("Save Done");
+//		} finally {
+//			if (out != null) {
+//				out.close();
+//			}
+//		}
+//
+//	}
 
 }

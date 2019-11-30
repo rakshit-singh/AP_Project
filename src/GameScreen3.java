@@ -272,16 +272,16 @@ public class GameScreen3 extends Application {
 	}
 
 	public void checkOpacity() {
-		// if (lawn.SunCount < 50) {
-		// sidebar_sunflower.setOpacity(0.5);
-		// sidebar_walnut.setOpacity(0.5);
-		// sidebar_shooter.setOpacity(0.5);
-		// cherry_img.setOpacity(0.5);
-		// }
+		 if (lawn.SunCount < 50) {
+		 sidebar_sunflower.setOpacity(0.5);
+		 sidebar_walnut.setOpacity(0.5);
+		 sidebar_shooter.setOpacity(0.5);
+		 cherry_img.setOpacity(0);
+		 }
 
 		if (lawn.SunCount < 100) {
 			sidebar_shooter.setOpacity(0.5);
-			cherry_img.setOpacity(0.5);
+			cherry_img.setOpacity(0);
 			sidebar_sunflower.setOpacity(1);
 			sidebar_walnut.setOpacity(1);
 		}
@@ -289,12 +289,12 @@ public class GameScreen3 extends Application {
 		else if (lawn.SunCount < 150) {
 			// cherry_img.setOpacity(0.5);
 			sidebar_shooter.setOpacity(1);
-			cherry_img.setOpacity(0.5);
+			cherry_img.setOpacity(0);
 			sidebar_sunflower.setOpacity(1);
 			sidebar_walnut.setOpacity(1);
 
 		} else {
-			cherry_img.setOpacity(0.5);
+			cherry_img.setOpacity(0);
 			sidebar_shooter.setOpacity(1);
 			// cherry_img.setOpacity(0.5);
 			sidebar_sunflower.setOpacity(1);

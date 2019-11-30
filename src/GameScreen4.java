@@ -272,12 +272,12 @@ public class GameScreen4 extends Application {
 	}
 
 	public void checkOpacity() {
-		// if (lawn.SunCount < 50) {
-		// sidebar_sunflower.setOpacity(0.5);
-		// sidebar_walnut.setOpacity(0.5);
-		// sidebar_shooter.setOpacity(0.5);
-		// cherry_img.setOpacity(0.5);
-		// }
+		if (lawn.SunCount < 50) {
+			sidebar_sunflower.setOpacity(0.5);
+			sidebar_walnut.setOpacity(0.5);
+			sidebar_shooter.setOpacity(0.5);
+			cherry_img.setOpacity(0.5);
+		}
 
 		if (lawn.SunCount < 100) {
 			sidebar_shooter.setOpacity(0.5);

@@ -31,6 +31,7 @@ public class GameScreen1 extends Application {
 	private ArrayList<TranslateTransition> translators = new ArrayList<>();
 	@FXML
 	public Button menu;
+
 	private boolean isPaused = false;
 	private boolean blank_click = true;
 	private Stage primaryStage2;
@@ -292,24 +293,24 @@ public class GameScreen1 extends Application {
 
 		if (lawn.SunCount < 100) {
 			sidebar_shooter.setOpacity(0.5);
-			cherry_img.setOpacity(0.5);
-			sidebar_sunflower.setOpacity(0.5);
-			sidebar_walnut.setOpacity(0.5);
+			cherry_img.setOpacity(0);
+			sidebar_sunflower.setOpacity(0);
+			sidebar_walnut.setOpacity(0);
 		}
 
 		else if (lawn.SunCount < 150) {
 			// cherry_img.setOpacity(0.5);
 			sidebar_shooter.setOpacity(1);
-			cherry_img.setOpacity(0.5);
-			sidebar_sunflower.setOpacity(0.5);
-			sidebar_walnut.setOpacity(0.5);
+			cherry_img.setOpacity(0);
+			sidebar_sunflower.setOpacity(0);
+			sidebar_walnut.setOpacity(0);
 
 		} else {
-			cherry_img.setOpacity(0.5);
+			cherry_img.setOpacity(0);
 			sidebar_shooter.setOpacity(1);
 			// cherry_img.setOpacity(0.5);
-			sidebar_sunflower.setOpacity(0.5);
-			sidebar_walnut.setOpacity(0.5);
+			sidebar_sunflower.setOpacity(0);
+			sidebar_walnut.setOpacity(0);
 		}
 		// repeeater_img.setOpacity(0.5);
 		// cherry_img.setOpacity(0.5);
@@ -428,6 +429,9 @@ public class GameScreen1 extends Application {
 		}
 
 		public void handle(ActionEvent event) {
+			// if (isloading){
+			//
+			// }
 			if (!isPaused) {
 				if (System.currentTimeMillis() - lastrun > 30000 && zombie_count > 0) {
 					System.out.println("spawning zombie");
@@ -533,7 +537,7 @@ public class GameScreen1 extends Application {
 				try {
 					throw new LevelWonException();
 				} catch (Exception e) {
-					if(lawn.isLevelChangeNeeded()){
+					if (lawn.isLevelChangeNeeded()) {
 						lawn.setLevelChangeNeeded(false);
 						try {
 							change_level();
@@ -829,7 +833,6 @@ public class GameScreen1 extends Application {
 
 	}
 
-
 	public void change_level() throws IOException {
 
 		Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
@@ -841,6 +844,5 @@ public class GameScreen1 extends Application {
 		System.out.println("New lawn");
 
 	}
-
 
 }

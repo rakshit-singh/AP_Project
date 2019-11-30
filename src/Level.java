@@ -1,4 +1,3 @@
-
 //import javax.swing.text.html.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,22 +11,16 @@ import java.util.HashMap;
 
 import com.sun.xml.internal.bind.v2.runtime.output.ForkXmlOutput;
 
-
-
-
-
-
 public class Level {
 
 	protected int count_zombies;
 	protected Lawn lawn;
 
 	public Level() throws CloneNotSupportedException {
-			count_zombies=10;
-			lawn=new Lawn(0,0);
+		count_zombies = 10;
+		lawn = new Lawn(0, 0);
 	}
 }
-
 
 class Lawn implements Serializable {
 
@@ -182,10 +175,11 @@ class Lawn implements Serializable {
 		LevelToZombiesMap.put(4, 3);
 
 		LevelZombieCount = new HashMap<>();
-		LevelZombieCount.put(0, 1);
-		LevelZombieCount.put(1, 2);
-		LevelZombieCount.put(2, 3);
-		LevelZombieCount.put(3, 30);
+		LevelZombieCount.put(0, 2);
+		LevelZombieCount.put(1, 4);
+		LevelZombieCount.put(2, 6);
+		LevelZombieCount.put(3, 8);
+		LevelZombieCount.put(4, 10);
 		lawnmowerSetup = false;
 		this.zombietarget = LevelZombieCount.get(this.level);
 	}
@@ -445,7 +439,8 @@ class LevelWonException extends Exception {
 		super("Level Won. Proceeding to the Next Level");
 	}
 }
-class Sun{
+
+class Sun {
 	private boolean exists;
 
 	public boolean isExists() {
@@ -457,7 +452,7 @@ class Sun{
 		this.exists = exists;
 	}
 
-	public Sun(){
-		exists=true;
+	public Sun() {
+		exists = true;
 	}
 }

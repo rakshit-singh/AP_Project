@@ -165,7 +165,7 @@ class Lawn implements Serializable {
 		LevelZombieCount.put(1, 20);
 		LevelZombieCount.put(2, 25);
 		LevelZombieCount.put(3, 30);
-
+		lawnmowerSetup=false;
 		this.zombietarget = LevelZombieCount.get(this.level);
 	}
 

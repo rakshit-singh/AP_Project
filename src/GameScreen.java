@@ -72,7 +72,7 @@ public class GameScreen extends Application {
 	public ImageView lawnmower_3;
 	public ImageView lawnmower_4;
 
-	public Lawn lawn = new Lawn(0, 0);
+	public Lawn lawn = new Lawn(50, 0);
 	private int zombie_count = Lawn.LevelZombieCount.get(lawn.level);
 	private int zombie_killed = zombie_count;//No. of Zombies to be killed to complete level
 	
@@ -265,6 +265,7 @@ public class GameScreen extends Application {
 			checkOpacity();
 			curGif = 2;
 			isPlaced = false;
+			blank_click=false;
 			// System.out.println(actionEvent.getSource());
 		}
 	}
@@ -412,100 +413,106 @@ public class GameScreen extends Application {
 				return new ImageView("Conehead_Zombie.gif");
 			}
 		}
-public void handle(ActionEvent event) {
-	if (System.currentTimeMillis() - lastrun > 30000 && zombie_count>0) {
-		System.out.println("spawning zombie");
-		lastrun = System.currentTimeMillis();
-		Random r = new Random();
-		int lane = r.nextInt(5);
-		int zombie_type = r.nextInt(2);// TODO -> change to 4
 
-		ImageView im = getZombiegif(zombie_type);
-		lawn.SpawnZombies(zombie_type, lane, im);
-		im.setX(900);
-		im.setY(lawn.getSpawn_points()[lane]);
-		System.out.println("Adding Now");
-		Anchor.getChildren().add(im);
-		zombie_count--;
+		public void handle(ActionEvent event) {
+			if (!isPaused) {
+				if (System.currentTimeMillis() - lastrun > 30000 && zombie_count > 0) {
+					System.out.println("spawning zombie");
+					lastrun = System.currentTimeMillis();
+					Random r = new Random();
+					int lane = r.nextInt(5);
+					int zombie_type = r.nextInt(2);// TODO -> change to 4
 
-	}
-	for(Zombie z:lawn.getZombie_arr()){
-		if(z.getImage().getX()<50 && lawn.getLawnMowers().get(z.getLane())==null){
-			System.out.println("Game Lost");
-			restart_game();
-//			break;
-		}
-		for(LawnMower l : lawn.getLawnMowers()){
-			if(l!=null) {
-				if (z.getImage().getX() < l.getImage().getX() + 200 && z.getLane() == l.getLane()) {
-					System.out.println("Clear 1");
-					setLawnMower(l.getLane());
-					clearLane(l.getLane());
-
+					ImageView im = getZombiegif(zombie_type);
+					lawn.SpawnZombies(zombie_type, lane, im);
+					im.setX(900);
+					im.setY(lawn.getSpawn_points()[lane]);
+					System.out.println("Adding Now");
+					Anchor.getChildren().add(im);
+					zombie_count--;
 
 				}
-			}
-		}
-	}
-//	boolean stop = false;
-	for (Zombie z : lawn.getZombie_arr()) {
-		ImageView im= z.getImage();
-		double x = im.getX();
-		if(x<50 && lawn.getLawnMowers().get(z.getLane())==null){
-			System.out.println("Game Lost");
+				for (Zombie z : lawn.getZombie_arr()) {
+					if (z.getImage().getX() < 50 && lawn.getLawnMowers().get(z.getLane()) == null) {
+						System.out.println("Game Lost");
+						restart_game();
 //			break;
-		}
-//		System.out.println(x);
-		if (!z.isStop()) {
-//					im.setTranslateX(x - 10);//Moving the zombie by 1
-			im.setX(x - 15);
-		}
-		ArrayList<Integer> removal=new ArrayList<>();
-			for (Character p : lawn.getActiveChars()) {
-				if (p instanceof Plant) {
-					if (im.getLayoutBounds().intersects(p.getImage().getLayoutBounds()) && p.getLane()==z.getLane()) {
-						z.setStop(true);
-						System.out.println("condition met");
-						try {
-							((Defend) p).takeDamage(z);
-						}
-						catch(Exception e){
-							System.out.println("Cherry bomb");
+					}
+					for (LawnMower l : lawn.getLawnMowers()) {
+						if (l != null) {
+							if (z.getImage().getX() < l.getImage().getX() + 200 && z.getLane() == l.getLane()) {
+								System.out.println("Clear 1");
+								setLawnMower(l.getLane());
+								clearLane(l.getLane());
+
+
+							}
 						}
 					}
+				}
+//	boolean stop = false;
+				for (Zombie z : lawn.getZombie_arr()) {
+					if (!isPaused) {
+						ImageView im = z.getImage();
+						double x = im.getX();
+						if (x < 50 && lawn.getLawnMowers().get(z.getLane()) == null) {
+							System.out.println("Game Lost");
+							restart_game();
+//			break;
+						}
+//		System.out.println(x);
+						if (!z.isStop()) {
+//					im.setTranslateX(x - 10);//Moving the zombie by 1
+							im.setX(x - 15);
+						}
+						ArrayList<Integer> removal = new ArrayList<>();
+						for (Character p : lawn.getActiveChars()) {
+							if (p instanceof Plant) {
+								if (im.getLayoutBounds().intersects(p.getImage().getLayoutBounds()) && p.getLane() == z.getLane()) {
+									System.out.println("True");
+									z.setStop(true);
+									System.out.println("condition met");
+									try {
+										((Defend) p).takeDamage(z);
+									} catch (Exception e) {
+										System.out.println("Cherry bomb");
+									}
+								}
 //					System.out.println("Plant health= "+p.health);
 
-				}
-				removal=lawn.checkPlantStatus();
-			}
-				for (int i : removal) {
-					lawn.getActiveChars().remove(i);
-				}
-
-			}
-
-			for (Character i : lawn.getActiveChars()) {
-				if (i instanceof Cherrybomb) {
-					double x = i.getImage().getX();
-					double y = i.getImage().getY();
-					for (Zombie z : lawn.getZombie_arr()) {
-						if (z.getImage().getX() < x + 60 || z.getImage().getY() < y + 60) {
-							z.setExists(false);
-							z.getImage().setVisible(false);
+							}
+							removal = lawn.checkPlantStatus();
 						}
+						for (int i : removal) {
+							lawn.getActiveChars().remove(i);
+						}
+
 					}
-					i.setExists(false);
-					i.getImage().setVisible(false);
+				}
+
+				for (Character i : lawn.getActiveChars()) {
+					if (i instanceof Cherrybomb) {
+						double x = i.getImage().getX();
+						double y = i.getImage().getY();
+						for (Zombie z : lawn.getZombie_arr()) {
+							if (z.getImage().getX() < x + 60 || z.getImage().getY() < y + 60) {
+								z.setExists(false);
+								z.getImage().setVisible(false);
+							}
+						}
+						i.setExists(false);
+						i.getImage().setVisible(false);
+					}
+				}
+				lawn.removeDeadZombies();
+				for (int i = 0; i < lawn.getActiveChars().size(); i++) {
+					if (lawn.getActiveChars().get(i) instanceof Cherrybomb) {
+						lawn.getActiveChars().remove(i);
+					}
 				}
 			}
-			lawn.removeDeadZombies();
-			for (int i = 0; i < lawn.getActiveChars().size(); i++) {
-				if (lawn.getActiveChars().get(i) instanceof Cherrybomb) {
-					lawn.getActiveChars().remove(i);
-				}
-			}
-		}
-		int lane=-1;
+
+			int lane = -1;
 			// for(Character c: lawn.getActiveChars()){
 			// if(c instanceof Shooter){
 			// for(Zombie r: lawn.getZombie_arr()){
@@ -525,11 +532,8 @@ public void handle(ActionEvent event) {
 			// }
 			// }
 			// }
-
 		}
-
-
-
+	}
 	public void setLawnMower(int lane) {
 		if (lane == 0) {
 			movelawnmover(lawnmower_0);
@@ -616,6 +620,7 @@ public void movelawnmover(ImageView lawnmower) {
 				spawn_pea(p);
 			} else if (curGif == 1) {
 
+//				System.out.println("Hey");
 				lawn.createObject(lawn.calcLane(sunflower_gif.getY() + 50), curGif, sunflower_gif);
 			} else if (curGif == 2) {
 				lawn.createObject(lawn.calcLane(walnut_gif.getY()), curGif, walnut_gif);
@@ -624,7 +629,7 @@ public void movelawnmover(ImageView lawnmower) {
 			}
 			blank_click = true;
 		}
-		// lawn.displayChar();
+		 lawn.displayChar();
 		// System.out.println(lawn.getActiveChars().size());
 		// if (pea_spawnable && curGif == 0) {
 		// ImageView img = new Pea().getPea();
@@ -641,7 +646,7 @@ public void movelawnmover(ImageView lawnmower) {
 		//
 		// pea_spawnable = false;
 		// }
-		// Timeline t = new Timeline();
+		 Timeline t = new Timeline();
 
 	}
 
@@ -731,17 +736,20 @@ public void movelawnmover(ImageView lawnmower) {
 		}
 	}
 		public void restart_game(){
+			primaryStage.close();
 		}
 
 
 
 
 	public void setupLawnmowers() {
-		lawn.getLawnMowers().get(0).setImage(lawnmower_0);
-		lawn.getLawnMowers().get(1).setImage(lawnmower_1);
-		lawn.getLawnMowers().get(2).setImage(lawnmower_2);
-		lawn.getLawnMowers().get(3).setImage(lawnmower_3);
-		lawn.getLawnMowers().get(4).setImage(lawnmower_4);
+		if(!lawn.isLawnmowerSetup())
+			lawn.getLawnMowers().get(0).setImage(lawnmower_0);
+			lawn.getLawnMowers().get(1).setImage(lawnmower_1);
+			lawn.getLawnMowers().get(2).setImage(lawnmower_2);
+			lawn.getLawnMowers().get(3).setImage(lawnmower_3);
+			lawn.getLawnMowers().get(4).setImage(lawnmower_4);
+			lawn.setLawnmowerSetup(true);
 
 	}
 

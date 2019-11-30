@@ -50,7 +50,6 @@ public class LoginScreen extends Application {
         Scene scene = new Scene(loader);
         Stage app_stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         app_stage.setScene(scene);
-
         app_stage.show();
     }
 

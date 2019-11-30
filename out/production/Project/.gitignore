@@ -1,3 +1,4 @@
+/Character.class
 /CherryBomb_gif.gif
 /CherryBomb_gif.webp
 /Cherry_Bomb1.jpg
@@ -33,7 +34,6 @@
 /Attacker.class
 /BasicZombie.class
 /BucketZombie.class
-/Character.class
 /Cherrybomb.class
 /ConeZombie.class
 /Defend.class
@@ -48,6 +48,7 @@
 /LawnMower.class
 /LeaderBoard.class
 /Level.class
+/LevelWonException.class
 /LoginScreen.class
 /Main.class
 /MainScreen.class
@@ -60,4 +61,4 @@
 /Walnut.class
 /Zombie.class
 /saveposition.class
-/LevelWonException.class
+/User.class

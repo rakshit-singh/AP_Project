@@ -518,15 +518,47 @@ public class GameScreen extends Application {
 			if (lawn.getZombie_arr().size() == 0 && zombie_count <= 0) {
 				lawn.setLevelChangeNeeded(true);
 				System.out.println("In If Block");
-//				change_level();
+				// change_level();
 				try {
 					throw new LevelWonException();
 				} catch (Exception e) {
 					try {
-						if(lawn.isLevelChangeNeeded()) {
+						if (lawn.isLevelChangeNeeded()) {
 							lawn.setLevelChangeNeeded(false);
-							zombie_count=3;
-							change_level();
+							if (lawn.level == 0) {
+								lawn.level = 1;
+								lawn.SunCount = 0;
+								lawn.zombietarget = 2;
+								lawn.ResetLawn();
+								zombie_count = 2;
+								zombie_killed = 2;
+								change_level();
+							} else if (lawn.level == 1) {
+								lawn.level = 2;
+								lawn.SunCount = 0;
+								lawn.zombietarget = 3;
+								lawn.ResetLawn();
+								zombie_count = 3;
+								zombie_killed = 3;
+								change_level();
+							} else if (lawn.level == 2) {
+								lawn.level = 3;
+								lawn.SunCount = 0;
+								lawn.zombietarget = 4;
+								lawn.ResetLawn();
+								zombie_count = 4;
+								zombie_killed = 4;
+								change_level();
+							} else if (lawn.level == 3) {
+								lawn.level = 4;
+								lawn.SunCount = 0;
+								lawn.zombietarget = Lawn.LevelZombieCount.get(4);
+								lawn.ResetLawn();
+								zombie_count = lawn.zombietarget;
+								zombie_killed = lawn.zombietarget;
+								change_level();
+							}
+
 						}
 					} catch (IOException ex) {
 						ex.printStackTrace();
@@ -777,16 +809,17 @@ public class GameScreen extends Application {
 		lawn.setLawnmowerSetup(true);
 
 	}
+
 	public void change_level() throws IOException, CloneNotSupportedException {
-//		Stage stage = (Stage) menu.getScene().getWindow();
-//		stage.close();
-//		Stage ps2=new Stage();
+		// Stage stage = (Stage) menu.getScene().getWindow();
+		// stage.close();
+		// Stage ps2=new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 		Scene scene = new Scene(root);
 		((Stage) Anchor.getScene().getWindow()).setTitle("Game Screen");
 		((Stage) Anchor.getScene().getWindow()).setScene(scene);
 		primaryStage.show();
-		lawn=new Lawn(0,0);
+		// lawn=new Lawn(0,0);
 		System.out.println("New lawn");
 
 	}

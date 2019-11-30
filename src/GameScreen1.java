@@ -533,6 +533,14 @@ public class GameScreen1 extends Application {
 				try {
 					throw new LevelWonException();
 				} catch (Exception e) {
+					if(lawn.isLevelChangeNeeded()){
+						lawn.setLevelChangeNeeded(false);
+						try {
+							change_level();
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+					}
 					// try {
 					// if (lawn.isLevelChangeNeeded()) {
 					// lawn.setLevelChangeNeeded(false);
@@ -822,17 +830,17 @@ public class GameScreen1 extends Application {
 	}
 
 
-//	public void change_level() throws IOException, CloneNotSupportedException {
-//
-//		Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-//		Scene scene = new Scene(root);
-//		((Stage) Anchor.getScene().getWindow()).setTitle("Game Screen");
-//		((Stage) Anchor.getScene().getWindow()).setScene(scene);
-//		primaryStage.show();
-//		// lawn=new Lawn(0,0);
-//		System.out.println("New lawn");
-//
-//	}
+	public void change_level() throws IOException {
+
+		Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+		Scene scene = new Scene(root);
+		((Stage) Anchor.getScene().getWindow()).setTitle("Login Screen");
+		((Stage) Anchor.getScene().getWindow()).setScene(scene);
+		primaryStage.show();
+		// lawn=new Lawn(0,0);
+		System.out.println("New lawn");
+
+	}
 
 
 }

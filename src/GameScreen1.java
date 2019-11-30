@@ -284,12 +284,12 @@ public class GameScreen1 extends Application {
 
 	public void checkOpacity() {
 
-		 if (lawn.SunCount < 50) {
-		 sidebar_sunflower.setOpacity(0);
-		 sidebar_walnut.setOpacity(0);
-		 sidebar_shooter.setOpacity(0.5);
-		 cherry_img.setOpacity(0);
-		 }
+		if (lawn.SunCount < 50) {
+			sidebar_sunflower.setOpacity(0);
+			sidebar_walnut.setOpacity(0);
+			sidebar_shooter.setOpacity(0.5);
+			cherry_img.setOpacity(0);
+		}
 
 		if (lawn.SunCount < 100) {
 			sidebar_shooter.setOpacity(0.5);
@@ -736,7 +736,7 @@ public class GameScreen1 extends Application {
 	public void moveSlider() {
 
 		Timeline task = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(slider.progressProperty(), 0)),
-				new KeyFrame(Duration.seconds(12*zombie_count), new KeyValue(slider.progressProperty(), 1)));
+				new KeyFrame(Duration.seconds(12 * zombie_count), new KeyValue(slider.progressProperty(), 1)));
 		task.playFromStart();
 	}
 

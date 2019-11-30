@@ -1,3 +1,4 @@
+
 //import javax.swing.text.html.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -409,7 +410,7 @@ class Lawn implements Serializable {
 
 	public void Serialize() throws IOException {
 		ObjectOutputStream out = null;
-
+		System.out.println("In Function");
 		for (Zombie z : this.getZombie_arr()) {
 			System.out.println("Zombie c " + z.getImage().getX() + " " + z.position[0] + " " + z.getLane());
 			z.position[0] = z.getImage().getX();

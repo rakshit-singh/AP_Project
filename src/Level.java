@@ -24,8 +24,33 @@ public class Level {
 
 
 class Lawn implements Serializable{
-    
-	private ArrayList<Character> activeChars;
+    private boolean lawnmowerSetup;
+
+    public boolean isLawnmowerSetup() {
+        return lawnmowerSetup;
+    }
+
+    public void setLawnmowerSetup(boolean lawnmowerSetup) {
+        this.lawnmowerSetup = lawnmowerSetup;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public static HashMap<Integer, Integer> getLevelToZombiesMap() {
+        return LevelToZombiesMap;
+    }
+
+    public static void setLevelToZombiesMap(HashMap<Integer, Integer> levelToZombiesMap) {
+        LevelToZombiesMap = levelToZombiesMap;
+    }
+
+    private ArrayList<Character> activeChars;
     private static double zombie_start_point = 887;// X Coordinate for spawning the zombies
     private double[] y_coord={100,200,330,440,550};
     private double[] x_coord={232,306,382,462,539,615,685,756,835};
@@ -45,6 +70,7 @@ class Lawn implements Serializable{
     }
 
     public Lawn() throws CloneNotSupportedException {
+
 
         activeChars=new ArrayList<>();
         lawnMowers=new ArrayList<>();

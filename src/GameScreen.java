@@ -75,7 +75,7 @@ public class GameScreen extends Application {
 
 
 
-	public Lawn lawn = new Lawn();
+	Lawn lawn = new Lawn();
 
 	private int[] y_coord = { 50, 180, 310, 420, 540 };
 
@@ -203,6 +203,7 @@ public class GameScreen extends Application {
 			Anchor.getChildren().add(shooter_gif);
 			sunCount = sunCount - 100;
 			sun.setText("" + sunCount);
+			checkOpacity();
 			curGif = 0;
 			isPlaced = false;
 			blank_click=false;
@@ -336,35 +337,11 @@ public class GameScreen extends Application {
 			isPaused = false;
 		}
 	}
-
-	// @Override
-	// public void initialize(URL location, ResourceBundle resources) {
-	// TranslateTransition translatorObj = new
-	// TranslateTransition(Duration.seconds(38), zombie_gif);
-	// translatorObj.setToX(-880);
-	// translatorObj.setAutoReverse(true);
-	// translatorObj.play();
-	// }
-
-//	@Override
-//	public void initialize(URL location, ResourceBundle resources) {
-//		TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(38), zombie_gif);
-//		translators.add(translatorObj);
-//		// translatorObj.setDuration(Duration.seconds(10));
-//		translatorObj.setToX(-880);
-//		translatorObj.setAutoReverse(true);
-//		// translatorObj.setCycleCount(Animation.INDEFINITE);
-//
-//		translatorObj.play();
-//	}
-
-
-
 	public void setupTimeline() {
 		KeyFrame kf = new KeyFrame(Duration.seconds(20), new TimeHandler());
 		Timeline timeline = new Timeline(kf);
 
-		KeyFrame kfz = new KeyFrame(Duration.seconds(0.5), new ZombieTimeHandler());
+		KeyFrame kfz = new KeyFrame(Duration.seconds(2), new ZombieTimeHandler());
 		Timeline timelinezombies = new Timeline(kfz);
 
 		KeyFrame kfp=new KeyFrame(Duration.millis(100),new PeaHandler());
@@ -449,10 +426,32 @@ public void handle(ActionEvent event) {
 		Anchor.getChildren().add(im);
 
 	}
+	for(Zombie z:lawn.getZombie_arr()){
+		if(z.getImage().getX()<50 && lawn.getLawnMowers().get(z.getLane())==null){
+			System.out.println("Game Lost");
+			restart_game();
+//			break;
+		}
+		for(LawnMower l : lawn.getLawnMowers()){
+			if(l!=null) {
+				if (z.getImage().getX() < l.getImage().getX() + 200 && z.getLane() == l.getLane()) {
+					System.out.println("Clear 1");
+					setLawnMower(l.getLane());
+					clearLane(l.getLane());
+
+
+				}
+			}
+		}
+	}
 //	boolean stop = false;
 	for (Zombie z : lawn.getZombie_arr()) {
 		ImageView im= z.getImage();
 		double x = im.getX();
+		if(x<50 && lawn.getLawnMowers().get(z.getLane())==null){
+			System.out.println("Game Lost");
+//			break;
+		}
 //		System.out.println(x);
 		if (!z.isStop()) {
 //					im.setTranslateX(x - 10);//Moving the zombie by 1
@@ -507,17 +506,6 @@ public void handle(ActionEvent event) {
 			}
 		}
 		int lane=-1;
-		for(Zombie z:lawn.getZombie_arr()){
-			for(LawnMower l : lawn.getLawnMowers()){
-				if(z.getImage().getX()<l.getImage().getX()+200 && z.getLane()==l.getLane()){
-					System.out.println("Clear 1");
-					setLawnMower(l.getLane());
-					clearLane(l.getLane());
-
-
-				}
-			}
-		}
 
 
 
@@ -525,29 +513,6 @@ public void handle(ActionEvent event) {
 
 
 
-
-
-
-
-//		for(Character c: lawn.getActiveChars()){
-//			if(c instanceof Shooter){
-//					for(Zombie r: lawn.getZombie_arr()){
-//						if(r.getLane()==c.getLane()){
-//							int n=pea_imageView.indexOf(c);
-//							TranslateTransition translatorObj=pea_translate.get(n);
-//							translatorObj.stop();
-//							translatorObj.setFromX(c.getImage().getX()+100);
-//							translatorObj.setToX(r.getImage().getX()-400);
-//							translatorObj.setDuration(Duration.seconds(2));
-//							translatorObj.setCycleCount(1);
-////							translatorObj.setCycleCount(Animation.INDEFINITE);
-//							translatorObj.playFromStart();
-//
-////				tra/nslatorObj.play();
-//						}
-//					}
-//			}
-//		}
 
 
 	}
@@ -568,6 +533,7 @@ public void setLawnMower(int lane){
 		else if(lane==4){
 			movelawnmover(lawnmower_4);
 		}
+		lawn.getLawnMowers().set(lane,null);
 
 
 }
@@ -577,10 +543,7 @@ public void movelawnmover(ImageView lawnmower) {
 	translators.add(translatorObj);
 	// translatorObj.setDuration(Duration.seconds(10));
 	translatorObj.setToX(1200);
-	// translatorObj.setAutoReverse(true);
-	// translatorObj.setCycleCount(Animation.INDEFINITE);
-//		System.out.println("Click detected");
-	// translatorObj.setCycleCount(Animation.INDEFINITE);
+
 
 	translatorObj.play();
 }
@@ -631,6 +594,7 @@ public void clearLane(int l){
 
 				// ImageView i=e.getSource();
 				((ImageView) i).setVisible(false);
+				checkOpacity();
 			}
 		}
 	};
@@ -760,11 +724,16 @@ public void clearLane(int l){
 
 		}
 		public void setupLawnmowers(){
-			lawn.getLawnMowers().get(0).setImage(lawnmower_0);
-			lawn.getLawnMowers().get(1).setImage(lawnmower_1);
-			lawn.getLawnMowers().get(2).setImage(lawnmower_2);
-			lawn.getLawnMowers().get(3).setImage(lawnmower_3);
-			lawn.getLawnMowers().get(4).setImage(lawnmower_4);
+			if(!lawn.isLawnmowerSetup()) {
+				lawn.getLawnMowers().get(0).setImage(lawnmower_0);
+				lawn.getLawnMowers().get(1).setImage(lawnmower_1);
+				lawn.getLawnMowers().get(2).setImage(lawnmower_2);
+				lawn.getLawnMowers().get(3).setImage(lawnmower_3);
+				lawn.getLawnMowers().get(4).setImage(lawnmower_4);
+				lawn.setLawnmowerSetup(true);
+			}
+		}
+		public void restart_game(){
 
 		}
 

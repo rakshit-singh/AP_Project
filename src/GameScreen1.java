@@ -409,6 +409,8 @@ public class GameScreen1 extends Application {
 						removal.add(z);
 					}
 				}
+				
+				
 				for (Zombie i : removal) {
 					lawn.getActiveChars().remove(i);
 					lawn.getZombie_arr().remove(i);
@@ -450,7 +452,10 @@ public class GameScreen1 extends Application {
 
 				}
 				for (Zombie z : lawn.getZombie_arr()) {
-					if (z.getImage().getX() < 50 && lawn.getLawnMowers().get(z.getLane()).getImage().getX()>100) {
+					// if (z.getImage().getX() < 50 &&
+					// lawn.getLawnMowers().get(z.getLane()).getImage().getX()>100)
+					// {
+					if (z.getImage().getX() == 0) {
 						System.out.println("Game Lost");
 						try {
 							restart_game();
@@ -475,7 +480,7 @@ public class GameScreen1 extends Application {
 					if (!isPaused) {
 						ImageView im = z.getImage();
 						double x = im.getX();
-						if (x < 50 && lawn.getLawnMowers().get(z.getLane()).getImage().getX()>100) {
+						if (x < 50 && lawn.getLawnMowers().get(z.getLane()).getImage().getX() > 100) {
 							System.out.println("Game Lost");
 							try {
 								restart_game();
@@ -636,7 +641,7 @@ public class GameScreen1 extends Application {
 		} else if (lane == 4) {
 			movelawnmover(lawnmower_4);
 		}
-//		lawn.getLawnMowers().set(lane, null);
+		// lawn.getLawnMowers().set(lane, null);
 
 	}
 
@@ -825,10 +830,11 @@ public class GameScreen1 extends Application {
 
 		}
 	}
+
 	public void restart_game() throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("ChooseLevel.fxml"));
 		Scene scene = new Scene(root);
-		((Stage) Anchor.getScene().getWindow()).setTitle("Login Screen");
+		((Stage) Anchor.getScene().getWindow()).setTitle("Choose Level");
 		((Stage) Anchor.getScene().getWindow()).setScene(scene);
 		primaryStage.show();
 	}

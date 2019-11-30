@@ -176,7 +176,7 @@ class Lawn implements Serializable {
 		LevelToZombiesMap.put(4, 3);
 
 		LevelZombieCount = new HashMap<>();
-		LevelZombieCount.put(0, 2);
+		LevelZombieCount.put(0, 20);
 		LevelZombieCount.put(1, 4);
 		LevelZombieCount.put(2, 6);
 		LevelZombieCount.put(3, 8);

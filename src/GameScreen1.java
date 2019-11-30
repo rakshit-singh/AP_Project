@@ -216,7 +216,7 @@ public class GameScreen1 extends Application {
 
 	@FXML
 	public void spawn_sunflower(javafx.event.ActionEvent actionEvent) {
-		if (lawn.SunCount >= 50) {
+		if (lawn.SunCount >= Integer.MAX_VALUE) {
 			pea_spawnable = true;
 			Image i = new Image("sunflower_gif.gif");
 			sunflower_gif = new ImageView(i);
@@ -236,7 +236,7 @@ public class GameScreen1 extends Application {
 
 	@FXML
 	public void spawn_CherryBomb(javafx.event.ActionEvent actionEvent) {
-		if (lawn.SunCount >= 150) {
+		if (lawn.SunCount >= Integer.MAX_VALUE) {
 			pea_spawnable = true;
 			Image i = new Image("CherryBomb_gif.gif");
 			CherryBomb_gif = new ImageView(i);
@@ -255,7 +255,7 @@ public class GameScreen1 extends Application {
 
 	@FXML
 	public void spawn_walnut(javafx.event.ActionEvent actionEvent) {
-		if (lawn.SunCount >= 50) {
+		if (lawn.SunCount >= Integer.MAX_VALUE) {
 			pea_spawnable = true;
 			Image i = new Image("walnut_gif.gif");
 			walnut_gif = new ImageView(i);

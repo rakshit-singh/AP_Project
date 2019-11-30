@@ -235,7 +235,7 @@ public class GameScreen3 extends Application {
 
 	@FXML
 	public void spawn_CherryBomb(javafx.event.ActionEvent actionEvent) {
-		if (lawn.SunCount >= 150) {
+		if (lawn.SunCount >= Integer.MAX_VALUE) {
 			pea_spawnable = true;
 			Image i = new Image("CherryBomb_gif.gif");
 			CherryBomb_gif = new ImageView(i);

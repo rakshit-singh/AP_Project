@@ -720,7 +720,7 @@ public class GameScreen extends Application {
 
 						// int c = Math.abs(r.nextInt());
 						// c = c % 5;
-						TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(1), sunflower_sun);
+						TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(2), sunflower_sun);
 						translators.add(translatorObj);
 						translatorObj.setToY(sunflower_sun.getY() + 45);
 						translatorObj.play();
@@ -735,7 +735,7 @@ public class GameScreen extends Application {
 	}
 
 	public void setupSunflowerSunTimeline() {
-		KeyFrame kf = new KeyFrame(Duration.seconds(5), new SunflowerHandler());
+		KeyFrame kf = new KeyFrame(Duration.seconds(10), new SunflowerHandler());
 		Timeline timeline = new Timeline(kf);
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
@@ -781,6 +781,7 @@ public class GameScreen extends Application {
 //		Stage stage = (Stage) menu.getScene().getWindow();
 //		stage.close();
 //		Stage ps2=new Stage();
+//		lawn=new Lawn(0,0);
 		Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 		Scene scene = new Scene(root);
 		((Stage) Anchor.getScene().getWindow()).setTitle("Game Screen");

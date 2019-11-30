@@ -12,15 +12,22 @@ import java.util.HashMap;
 
 import com.sun.xml.internal.bind.v2.runtime.output.ForkXmlOutput;
 
+
+
+
+
+
 public class Level {
 
 	protected int count_zombies;
 	protected Lawn lawn;
 
-	public Level() {
-
+	public Level() throws CloneNotSupportedException {
+			count_zombies=10;
+			lawn=new Lawn(0,0);
 	}
 }
+
 
 class Lawn implements Serializable {
 
@@ -234,6 +241,7 @@ class Lawn implements Serializable {
 					y = y_coord[i];
 				}
 			}
+
 		}
 		for (int i = 0; i < x_coord.length - 1; i++) {
 			if (x >= x_coord[8]) {
@@ -412,5 +420,21 @@ class LevelWonException extends Exception {
 	public LevelWonException() {
 		// TODO Auto-generated constructor stub
 		super("Level Won. Proceeding to the Next Level");
+	}
+}
+class Sun{
+	private boolean exists;
+
+	public boolean isExists() {
+
+		return exists;
+	}
+
+	public void setExists(boolean exists) {
+		this.exists = exists;
+	}
+
+	public Sun(){
+		exists=true;
 	}
 }

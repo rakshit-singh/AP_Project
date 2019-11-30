@@ -62,27 +62,27 @@
             <Font name="Times New Roman Bold" size="23.0" />
          </font>
       </Label>
-      <ImageView fx:id="lawnmower_3" fitHeight="126.0" fitWidth="169.0" layoutX="75.0" layoutY="420.0" onMouseClicked="#movelawnmover" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lawnmower_3" fitHeight="126.0" fitWidth="169.0" layoutX="75.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Lawn_mower_2.PNG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="lawnmower_4" fitHeight="126.0" fitWidth="169.0" layoutX="68.0" layoutY="533.0" onMouseClicked="#movelawnmover" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lawnmower_4" fitHeight="126.0" fitWidth="169.0" layoutX="68.0" layoutY="533.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Lawn_mower_2.PNG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="lawnmower_2" fitHeight="126.0" fitWidth="169.0" layoutX="75.0" layoutY="300.0" onMouseClicked="#movelawnmover" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lawnmower_2" fitHeight="126.0" fitWidth="169.0" layoutX="75.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Lawn_mower_2.PNG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Lawnmower_1" fitHeight="112.0" fitWidth="160.0" layoutX="92.0" layoutY="190.0" onMouseClicked="#movelawnmover" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lawnmower_1" fitHeight="112.0" fitWidth="160.0" layoutX="92.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Lawn_mower_2.PNG.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Lawnmower_0" fitHeight="112.0" fitWidth="160.0" layoutX="92.0" layoutY="70.0" onMouseClicked="#movelawnmover" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lawnmower_0" fitHeight="112.0" fitWidth="160.0" layoutX="92.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Lawn_mower_2.PNG.png" />
          </image>

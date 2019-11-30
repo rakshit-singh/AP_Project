@@ -41,7 +41,10 @@ class Lawn{
         LawnMower l3=(LawnMower) l1.clone();
         LawnMower l4=(LawnMower) l1.clone();
         LawnMower l5=(LawnMower) l1.clone();
-
+        l1.setLane(1);
+        l2.setLane(2);
+        l3.setLane(3);
+        l4.setLane(4);
         lawnMowers.add(l1);
         lawnMowers.add(l2);
         lawnMowers.add(l3);

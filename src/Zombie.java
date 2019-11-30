@@ -6,15 +6,50 @@ interface saveposition {
 }
 
 public class Zombie extends Character implements saveposition {
-	float movementSpeed;
-	float damage;
+	private float movementSpeed;
+	private float damage;
+	private boolean stop;
+	private Plant enemy;
+
+	public Plant getEnemy() {
+		return enemy;
+	}
+
+	public void setEnemy(Plant enemy) {
+		this.enemy = enemy;
+	}
 
 	public Zombie(float health, int lane, double[] position, float movementSpeed, float damage, ImageView image) {
 		super(health, lane, position, image);
 		this.movementSpeed = movementSpeed;
 		this.damage = damage;
+		stop=false;
+		enemy=null;
 	}
 
+	public float getMovementSpeed() {
+		return movementSpeed;
+	}
+
+	public void setMovementSpeed(float movementSpeed) {
+		this.movementSpeed = movementSpeed;
+	}
+
+	public float getDamage() {
+		return damage;
+	}
+
+	public void setDamage(float damage) {
+		this.damage = damage;
+	}
+
+	public boolean isStop() {
+		return stop;
+	}
+
+	public void setStop(boolean stop) {
+		this.stop = stop;
+	}
 }
 
 class BucketZombie extends Zombie {

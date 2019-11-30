@@ -3,7 +3,9 @@ import javafx.scene.image.ImageView;
 interface Attacker{
     public void attack();
 }
-
+interface Defend{
+    public void takeDamage(Zombie z);
+}
 
 public class Plant extends Character {
     final protected int sunsReq;
@@ -12,7 +14,6 @@ public class Plant extends Character {
         super(health, lane, position,image);
         this.waitingTime=waitingTime;
         this.sunsReq=sunsReq;
-
     }
 
     public int getSunsReq() {
@@ -24,10 +25,12 @@ public class Plant extends Character {
 
 }
 
-class Shooter extends Plant implements Attacker{
+class Shooter extends Plant implements Attacker,Defend{
     private boolean canAttack;
+    private Pea mypea;
     public Shooter(int lane, double[] position,ImageView image) {
         super(100, lane, position, 100, 5,image);
+        mypea=new Pea();
     }
 
     public boolean isCanAttack() {
@@ -36,6 +39,14 @@ class Shooter extends Plant implements Attacker{
 
     public void setCanAttack(boolean canAttack) {
         this.canAttack = canAttack;
+    }
+
+    public Pea getMypea() {
+        return mypea;
+    }
+
+    public void setMypea(Pea mypea) {
+        this.mypea = mypea;
     }
 
     @Override
@@ -47,11 +58,21 @@ class Shooter extends Plant implements Attacker{
     }
     public void shoot(Shooter s){
         Pea p=new Pea();
+    }
 
-
+    @Override
+    public void takeDamage(Zombie z) {
+        if(this.health-z.getDamage()>0) {
+            this.health -= z.getDamage();
+        }
+        else{
+            z.setStop(false);
+            this.mypea.getPea().setVisible(false);
+            this.setExists(false);
+        }
     }
 }
-class Repeater extends Plant implements  Attacker{
+class Repeater extends Plant implements  Attacker {
     private boolean canAttack;
     public Repeater(int lane, double[] position,ImageView image) {
         super(100, lane, position, 200, 8,image);
@@ -77,18 +98,39 @@ class Repeater extends Plant implements  Attacker{
         Pea p2=new Pea();
     }
 }
-class Walnut extends Plant{
-    final float defenseVal;
+class Walnut extends Plant implements  Defend{
+//    final float defenseVal;
     public Walnut(int lane, double[] position,ImageView image) {
         super(400, lane, position, 50, 5,image);
-        defenseVal=50;
+//        defenseVal=;
+    }
+
+    @Override
+    public void takeDamage(Zombie z) {
+        if(this.health-z.getDamage()>0) {
+            this.health -= z.getDamage();
+        }
+        else{
+            z.setStop(false);
+            this.setExists(false);
+        }
     }
 }
-class Sunflower extends  Plant{
+class Sunflower extends  Plant implements Defend{
     final float sunRate;
     public Sunflower(int lane, double[] position,ImageView image) {
         super(100, lane, position, 50, 5,image);
         sunRate=1;
+    }
+    @Override
+    public void takeDamage(Zombie z) {
+        if(this.health-z.getDamage()>0) {
+            this.health -= z.getDamage();
+        }
+        else{
+            z.setStop(false);
+            this.setExists(false);
+        }
     }
 
 }
@@ -126,3 +168,4 @@ class Pea {
     }
 
 }
+

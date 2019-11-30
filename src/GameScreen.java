@@ -124,7 +124,7 @@ public class GameScreen extends Application {
 			double[] curr = lawn.correct_layout(x, y);
 			shooter_gif.setX(curr[0] - 70);
 			shooter_gif.setY(curr[1] - 50);
-			System.out.println(e.getSource());
+//			System.out.println(e.getSource());
 		}
 	}
 
@@ -149,7 +149,7 @@ public class GameScreen extends Application {
 			double[] curr = lawn.correct_layout(x, y);
 			sunflower_gif.setX(curr[0] - 70);
 			sunflower_gif.setY(curr[1] - 50);
-			System.out.println(e.getSource());
+//			System.out.println(e.getSource());
 		}
 	}
 
@@ -162,7 +162,7 @@ public class GameScreen extends Application {
 			double[] curr = lawn.correct_layout(x, y);
 			CherryBomb_gif.setX(curr[0] - 70);
 			CherryBomb_gif.setY(curr[1] - 50);
-			System.out.println(e.getSource());
+//			System.out.println(e.getSource());
 		}
 	}
 
@@ -192,6 +192,7 @@ public class GameScreen extends Application {
 		if (sunCount >= 100) {
 			pea_spawnable = true;
 			Image i = new Image("shooter_gif.gif");
+
 			shooter_gif = new ImageView(i);
 			shooter_gif.setScaleX(0.5);
 			shooter_gif.setScaleY(0.5);
@@ -201,7 +202,7 @@ public class GameScreen extends Application {
 			curGif = 0;
 			isPlaced = false;
 			blank_click=false;
-			System.out.println(actionEvent.getSource());
+//			System.out.println(actionEvent.getSource());
 		}
 	}
 
@@ -221,7 +222,7 @@ public class GameScreen extends Application {
 			isPlaced = false;
 			blank_click=false;
 
-			System.out.println(actionEvent.getSource());
+//			System.out.println(actionEvent.getSource());
 		}
 	}
 
@@ -240,7 +241,7 @@ public class GameScreen extends Application {
 			curGif = 3;
 			isPlaced = false;
 			blank_click=false;
-			System.out.println(actionEvent.getSource());
+//			System.out.println(actionEvent.getSource());
 		}
 	}
 
@@ -258,7 +259,7 @@ public class GameScreen extends Application {
 			checkOpacity();
 			curGif = 2;
 			isPlaced = false;
-			System.out.println(actionEvent.getSource());
+//			System.out.println(actionEvent.getSource());
 		}
 	}
 
@@ -357,7 +358,7 @@ public class GameScreen extends Application {
 		KeyFrame kf = new KeyFrame(Duration.seconds(20), new TimeHandler());
 		Timeline timeline = new Timeline(kf);
 
-		KeyFrame kfz = new KeyFrame(Duration.seconds(20), new ZombieTimeHandler());
+		KeyFrame kfz = new KeyFrame(Duration.seconds(3), new ZombieTimeHandler());
 		Timeline timelinezombies = new Timeline(kfz);
 
 		timelinezombies.setCycleCount(Animation.INDEFINITE);
@@ -377,26 +378,84 @@ public class GameScreen extends Application {
 			}
 		}
 
-		public void handle(ActionEvent event) {
-			if (System.currentTimeMillis() - lastrun > 12000) {
-				lastrun = System.currentTimeMillis();
-				Random r = new Random();
-				int lane = r.nextInt(5);
-				int zombie_type = r.nextInt(2);// TODO -> change to 4
+//		public void handle(ActionEvent event) {
+//			if (System.currentTimeMillis() - lastrun > 12000) {
+//				lastrun = System.currentTimeMillis();
+//				Random r = new Random();
+//				int lane = r.nextInt(5);
+//				int zombie_type = r.nextInt(2);// TODO -> change to 4
+//
+//				ImageView im = getZombiegif(zombie_type);
+//				lawn.SpawnZombies(zombie_type, lane, im);
+//				im.setLayoutX(887);
+//				im.setLayoutY(lawn.getSpawn_points()[lane]);
+//				Anchor.getChildren().add(im);
+//
+//				TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(38), im);
+//				translatorObj.setToX(-880);
+//				translatorObj.setAutoReverse(true);
+//				translatorObj.play();
+//			}
+//		}
+public void handle(ActionEvent event) {
+	if (System.currentTimeMillis() - lastrun > 30000) {
+		System.out.println("spawning zombie");
+		lastrun = System.currentTimeMillis();
+		Random r = new Random();
+		int lane = r.nextInt(5);
+		int zombie_type = r.nextInt(2);// TODO -> change to 4
 
-				ImageView im = getZombiegif(zombie_type);
-				lawn.SpawnZombies(zombie_type, lane, im);
-				im.setLayoutX(887);
-				im.setLayoutY(lawn.getSpawn_points()[lane]);
-				Anchor.getChildren().add(im);
+		ImageView im = getZombiegif(zombie_type);
+		lawn.SpawnZombies(zombie_type, lane, im);
+		im.setX(900);
+		im.setY(lawn.getSpawn_points()[lane]);
+		System.out.println("Adding Now");
+		Anchor.getChildren().add(im);
 
-				TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(38), im);
-				translatorObj.setToX(-880);
-				translatorObj.setAutoReverse(true);
-				translatorObj.play();
-			}
-		}
 	}
+//	boolean stop = false;
+	for (Zombie z : lawn.getZombie_arr()) {
+		ImageView im= z.getImage();
+		double x = im.getX();
+//		System.out.println(x);
+		if (!z.isStop()) {
+//					im.setTranslateX(x - 10);//Moving the zombie by 1
+			im.setX(x - 15);
+		}
+//			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(3), im);
+//			translatorObj.setToX(im.getX()+5);
+//				translatorObj.setAutoReverse(true);
+//			translatorObj.play();
+		ArrayList<Integer> removal=new ArrayList<>();
+			for (Character p : lawn.getActiveChars()) {
+				if (p instanceof Plant) {
+					if (im.getLayoutBounds().intersects(p.getImage().getLayoutBounds()) && p.getLane()==z.getLane()) {
+						z.setStop(true);
+						System.out.println("condition met");
+						try {
+							((Defend) p).takeDamage(z);
+						}
+						catch(Exception e){
+							System.out.println("Cherry bomb");
+						}
+					}
+//					System.out.println("Plant health= "+p.health);
+
+				}
+				removal=lawn.checkPlantStatus();
+
+
+			}
+		for(int i:removal){
+			lawn.getActiveChars().remove(i);
+		}
+		lawn.displayChar();
+
+		}
+
+	}
+}
+
 
 	private class TimeHandler implements EventHandler<ActionEvent> {
 
@@ -443,7 +502,8 @@ public class GameScreen extends Application {
 		if(!blank_click) {
 			if (curGif == 0) {
 				System.out.println(shooter_gif.getY());
-				lawn.createObject(lawn.calcLane(shooter_gif.getY()+50), curGif, shooter_gif);
+				Shooter p=(Shooter)(lawn.createObject(lawn.calcLane(shooter_gif.getY()+50), curGif, shooter_gif));
+				spawn_pea(p);
 			} else if (curGif == 1) {
 
 				lawn.createObject(lawn.calcLane(sunflower_gif.getY()+50), curGif, sunflower_gif);
@@ -456,19 +516,21 @@ public class GameScreen extends Application {
 		}
 		lawn.displayChar();
 		System.out.println(lawn.getActiveChars().size());
-		if (pea_spawnable && curGif == 0) {
-			ImageView img = new Pea().getPea();
-			Anchor.getChildren().add(img);
-			img.setX(shooter_gif.getX()+120);
-			img.setY(shooter_gif.getY()+80);
-			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
-			translators.add(translatorObj);
-			translatorObj.setToX(1200);
-			translatorObj.setCycleCount(Animation.INDEFINITE);
-			translatorObj.play();
-			pea_spawnable = false;
-		}
-		Timeline t = new Timeline();
+//		if (pea_spawnable && curGif == 0) {
+//			ImageView img = new Pea().getPea();
+//
+//			Anchor.getChildren().add(img);
+//			img.setX(shooter_gif.getX()+120);
+//			img.setY(shooter_gif.getY()+80);
+//			TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
+//			translators.add(translatorObj);
+//			translatorObj.setToX(1200);
+//			translatorObj.setCycleCount(Animation.INDEFINITE);
+//			translatorObj.play();
+//
+//			pea_spawnable = false;
+//		}
+//		Timeline t = new Timeline();
 
 	}
 
@@ -534,6 +596,29 @@ public class GameScreen extends Application {
 			Timeline timeline = new Timeline(kf);
 			timeline.setCycleCount(Animation.INDEFINITE);
 			timeline.play();
+		}
+
+		public void spawn_pea(Shooter p){
+			if (pea_spawnable && curGif == 0) {
+				ImageView img = new Pea().getPea();
+
+				Anchor.getChildren().add(img);
+				img.setX(p.getImage().getX()+120);
+				img.setY(p.getImage().getY()+80);
+				TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(5), img);
+				translators.add(translatorObj);
+				translatorObj.setToX(1200);
+				translatorObj.setCycleCount(Animation.INDEFINITE);
+				translatorObj.play();
+
+				if(!p.isExists()){
+					translatorObj.pause();
+				}
+				pea_spawnable = false;
+
+			}
+			Timeline t = new Timeline();
+
 		}
 
 }

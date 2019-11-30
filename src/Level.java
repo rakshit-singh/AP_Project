@@ -18,7 +18,7 @@ class Lawn{
     private double[] y_coord={100,200,330,440,550};
     private double[] x_coord={232,306,382,462,539,615,685,756,835};
     private double[] spawn_points = { 44, 163, 290, 401, 526 };// Y Coordinates for spawning the zombies
-    
+    private  ArrayList<Zombie>zombie_arr=new ArrayList<>();
     public Lawn(){
         activeChars=new ArrayList<>();
     }
@@ -99,29 +99,60 @@ class Lawn{
         double[] arr={x,y};
         return arr;
     }
-    public void createObject(int lane,int num, ImageView image){
+
+    public static double getZombie_start_point() {
+        return zombie_start_point;
+    }
+
+    public static void setZombie_start_point(double zombie_start_point) {
+        Lawn.zombie_start_point = zombie_start_point;
+    }
+
+    public void setSpawn_points(double[] spawn_points) {
+        this.spawn_points = spawn_points;
+    }
+
+    public ArrayList<Zombie> getZombie_arr() {
+        return zombie_arr;
+    }
+
+    public void setZombie_arr(ArrayList<Zombie> zombie_arr) {
+        this.zombie_arr = zombie_arr;
+    }
+
+    public Plant createObject(int lane, int num, ImageView image){
         double[] pos={image.getX(),image.getY()};
         if(num==0){
             Plant s=new Shooter(lane,pos,image);
             activeChars.add(s);
+            return s;
         }
         else if(num==1){
             Plant s=new Sunflower(lane,pos,image);
             activeChars.add(s);
+            return s;
+
         }
         else if(num==2){
             Plant s=new Walnut(lane,pos,image);
             activeChars.add(s);
+            return s;
+
         }
         else if(num==3){
 
             Plant s=new Cherrybomb(lane,pos,image);
             activeChars.add(s);
+            return s;
+
         }
         else if(num==4){
             Plant s=new Repeater(lane,pos,image);
             activeChars.add(s);
+            return s;
+
         }
+        return null;
     }
     
  // Adds the zombies to active characters
@@ -131,22 +162,29 @@ class Lawn{
  			double[] arr = { 0.0, y };
  			Zombie z = new BasicZombie(lane, arr, image);
  			activeChars.add(z);
+ 			zombie_arr.add(z);
  		} else if (type == 1) {
  			double y = spawn_points[lane];
  			double[] arr = { 0.0, y };
  			Zombie z = new ConeZombie(lane, arr, image);
  			activeChars.add(z);
- 		} else if (type == 2) {
+            zombie_arr.add(z);
+
+        } else if (type == 2) {
  			double y = spawn_points[lane];
  			double[] arr = { 0.0, y};
  			Zombie z = new BucketZombie(lane, arr, image);
  			activeChars.add(z);
- 		} else if (type == 3) {
+            zombie_arr.add(z);
+
+        } else if (type == 3) {
  			double y = spawn_points[lane];
  			double[] arr = { 0.0, y };
  			Zombie z = new JavelinZombie(lane, arr, image);
  			activeChars.add(z);
- 		}
+            zombie_arr.add(z);
+
+        }
  	}
  	
     public int calcLane(double y){
@@ -163,6 +201,19 @@ class Lawn{
             System.out.println(s+"  lane= "+s.getLane());
         }
     }
+    public ArrayList<Integer> checkPlantStatus(){
+        ArrayList<Integer>a=new ArrayList<>();
+        for(int i=0;i<activeChars.size();i++){
+            if(!activeChars.get(i).isExists()){
+                activeChars.get(i).image.setVisible(false);
+                a.add(i);
+
+            }
+        }
+        return a;
+
+    }
+
 
 //    public
 }

@@ -18,7 +18,7 @@ public class MainScreen extends Application {
     private Stage primaryStage;
     public MainScreen() {
         primaryStage=new Stage();
-    }
+    }	
 
     public Stage getPrimaryStage() {
         return primaryStage;

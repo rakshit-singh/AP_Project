@@ -3,6 +3,7 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +14,8 @@ public class Level {
 
 
 class Lawn{
-    private ArrayList<Character> activeChars;
+    
+	private ArrayList<Character> activeChars;
     private static double zombie_start_point = 887;// X Coordinate for spawning the zombies
     private double[] y_coord={100,200,330,440,550};
     private double[] x_coord={232,306,382,462,539,615,685,756,835};
@@ -30,6 +32,7 @@ class Lawn{
     }
 
     public Lawn() throws CloneNotSupportedException {
+
         activeChars=new ArrayList<>();
         lawnMowers=new ArrayList<>();
         double[] arr={0,0};

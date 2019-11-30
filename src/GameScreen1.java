@@ -27,7 +27,7 @@ import java.util.*;
 import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
-public class GameScreen extends Application {
+public class GameScreen1 extends Application {
 	private ArrayList<TranslateTransition> translators = new ArrayList<>();
 	public Button menu;
 	private boolean isPaused = false;
@@ -73,7 +73,7 @@ public class GameScreen extends Application {
 	public ImageView lawnmower_3;
 	public ImageView lawnmower_4;
 
-	public Lawn lawn = new Lawn(50, 0);
+	public Lawn lawn = new Lawn(0, 0);
 	private int zombie_count = Lawn.LevelZombieCount.get(lawn.level);
 	private int zombie_killed = zombie_count;// No. of Zombies to be killed to
 												// complete level
@@ -105,7 +105,7 @@ public class GameScreen extends Application {
 	private ArrayList<Shooter> pea_imageView = new ArrayList<>();
 	private ArrayList<TranslateTransition> pea_translate = new ArrayList<>();
 
-	public GameScreen() throws CloneNotSupportedException {
+	public GameScreen1() throws CloneNotSupportedException {
 
 	}
 
@@ -208,6 +208,7 @@ public class GameScreen extends Application {
 			checkOpacity();
 			curGif = 0;
 			isPlaced = false;
+
 			blank_click = false;
 			// System.out.println(actionEvent.getSource());
 		}
@@ -272,6 +273,7 @@ public class GameScreen extends Application {
 	}
 
 	public void checkOpacity() {
+
 		if (lawn.SunCount < 50) {
 			sidebar_sunflower.setOpacity(0.5);
 			sidebar_walnut.setOpacity(0.5);
@@ -522,49 +524,49 @@ public class GameScreen extends Application {
 				try {
 					throw new LevelWonException();
 				} catch (Exception e) {
-					try {
-						if (lawn.isLevelChangeNeeded()) {
-							lawn.setLevelChangeNeeded(false);
-							if (lawn.level == 0) {
-								lawn.level = 1;
-								lawn.SunCount = 0;
-								lawn.zombietarget = 2;
-								lawn.ResetLawn();
-								zombie_count = 2;
-								zombie_killed = 2;
-								change_level();
-							} else if (lawn.level == 1) {
-								lawn.level = 2;
-								lawn.SunCount = 0;
-								lawn.zombietarget = 3;
-								lawn.ResetLawn();
-								zombie_count = 3;
-								zombie_killed = 3;
-								change_level();
-							} else if (lawn.level == 2) {
-								lawn.level = 3;
-								lawn.SunCount = 0;
-								lawn.zombietarget = 4;
-								lawn.ResetLawn();
-								zombie_count = 4;
-								zombie_killed = 4;
-								change_level();
-							} else if (lawn.level == 3) {
-								lawn.level = 4;
-								lawn.SunCount = 0;
-								lawn.zombietarget = Lawn.LevelZombieCount.get(4);
-								lawn.ResetLawn();
-								zombie_count = lawn.zombietarget;
-								zombie_killed = lawn.zombietarget;
-								change_level();
-							}
-
-						}
-					} catch (IOException ex) {
-						ex.printStackTrace();
-					} catch (CloneNotSupportedException ex) {
-						ex.printStackTrace();
-					}
+					// try {
+					// if (lawn.isLevelChangeNeeded()) {
+					// lawn.setLevelChangeNeeded(false);
+					// if (lawn.level == 0) {
+					// lawn.level = 1;
+					// lawn.SunCount = 0;
+					// lawn.zombietarget = 2;
+					// lawn.ResetLawn();
+					// zombie_count = 2;
+					// zombie_killed = 2;
+					// change_level();
+					// } else if (lawn.level == 1) {
+					// lawn.level = 2;
+					// lawn.SunCount = 0;
+					// lawn.zombietarget = 3;
+					// lawn.ResetLawn();
+					// zombie_count = 3;
+					// zombie_killed = 3;
+					// change_level();
+					// } else if (lawn.level == 2) {
+					// lawn.level = 3;
+					// lawn.SunCount = 0;
+					// lawn.zombietarget = 4;
+					// lawn.ResetLawn();
+					// zombie_count = 4;
+					// zombie_killed = 4;
+					// change_level();
+					// } else if (lawn.level == 3) {
+					// lawn.level = 4;
+					// lawn.SunCount = 0;
+					// lawn.zombietarget = Lawn.LevelZombieCount.get(4);
+					// lawn.ResetLawn();
+					// zombie_count = lawn.zombietarget;
+					// zombie_killed = lawn.zombietarget;
+					// change_level();
+					// }
+					//
+					// }
+					// } catch (IOException ex) {
+					// ex.printStackTrace();
+					// } catch (CloneNotSupportedException ex) {
+					// ex.printStackTrace();
+					// }
 					System.out.println(e.getMessage());
 					// LoadnextLevel
 				}
@@ -810,18 +812,19 @@ public class GameScreen extends Application {
 
 	}
 
-	public void change_level() throws IOException, CloneNotSupportedException {
-		// Stage stage = (Stage) menu.getScene().getWindow();
-		// stage.close();
-		// Stage ps2=new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-		Scene scene = new Scene(root);
-		((Stage) Anchor.getScene().getWindow()).setTitle("Game Screen");
-		((Stage) Anchor.getScene().getWindow()).setScene(scene);
-		primaryStage.show();
-		// lawn=new Lawn(0,0);
-		System.out.println("New lawn");
-
-	}
+	// public void change_level() throws IOException, CloneNotSupportedException
+	// {
+	// Stage stage = (Stage) menu.getScene().getWindow();
+	// stage.close();
+	// Stage ps2=new Stage();
+	// this.lawn = new Lawn(this.lawn.level + 1, 0);
+	// Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+	// Scene scene = new Scene(root);
+	// ((Stage) Anchor.getScene().getWindow()).setTitle("Game Screen");
+	// ((Stage) Anchor.getScene().getWindow()).setScene(scene);
+	// primaryStage.show();
+	// System.out.println("New lawn");
+	//
+	// }
 
 }

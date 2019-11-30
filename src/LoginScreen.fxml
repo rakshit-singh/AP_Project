@@ -19,7 +19,7 @@
          <font>
             <Font name="Times New Roman" size="30.0" />
          </font></Button>
-      <TextField layoutX="819.0" layoutY="238.0" prefHeight="60.0" prefWidth="340.0" />
+      <TextField fx:id="text" layoutX="819.0" layoutY="238.0" prefHeight="60.0" prefWidth="340.0" />
       <Label layoutX="827.0" layoutY="166.0" prefHeight="44.0" prefWidth="363.0" text="Enter your Username">
          <font>
             <Font name="Times New Roman Bold" size="34.0" />

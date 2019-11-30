@@ -3,7 +3,7 @@ import java.io.Serializable;
 import javafx.scene.image.ImageView;
 
 
-public class Character implements Cloneable {
+public class Character implements Cloneable, Serializable {
     protected boolean exists;
     protected float health;
     protected int lane;

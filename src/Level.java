@@ -3,6 +3,9 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +13,17 @@ import java.util.HashMap;
 import com.sun.xml.internal.bind.v2.runtime.output.ForkXmlOutput;
 
 public class Level {
+	
+	protected int count_zombies;
+	protected Lawn lawn;
+
+	public Level() {
+
+	}
 }
 
 
-class Lawn{
+class Lawn implements Serializable{
     
 	private ArrayList<Character> activeChars;
     private static double zombie_start_point = 887;// X Coordinate for spawning the zombies
@@ -22,7 +32,10 @@ class Lawn{
     private double[] spawn_points = { 44, 163, 290, 401, 526 };// Y Coordinates for spawning the zombies
     private  ArrayList<Zombie>zombie_arr=new ArrayList<>();
     private ArrayList<LawnMower> lawnMowers=new ArrayList<>();
-
+    
+    protected int level;
+	protected static HashMap<Integer, Integer> LevelToZombiesMap;
+	
     public ArrayList<LawnMower> getLawnMowers() {
         return lawnMowers;
     }
@@ -50,6 +63,12 @@ class Lawn{
         lawnMowers.add(l3);
         lawnMowers.add(l4);
         lawnMowers.add(l5);
+        
+        LevelToZombiesMap = new HashMap<>();
+		LevelToZombiesMap.put(1, 0);
+		LevelToZombiesMap.put(2, 1);
+		LevelToZombiesMap.put(3, 2);
+		LevelToZombiesMap.put(4, 3);
 
     }
     public void addCharacter(Character c){
@@ -251,7 +270,26 @@ class Lawn{
         return a;
 
     }
+    
+    public void Serialize() throws IOException {
+		ObjectOutputStream out = null;
 
+		for (Zombie z : this.getZombie_arr()) {
+			System.out.println("Zombie c " + z.getImage().getX() + " " + z.position[0] + " " + z.getLane());
+			z.position[0] = z.getImage().getX();
+			System.out.println("Zombie u " + z.position[0]);
+		}
+		try {
+
+			out = new ObjectOutputStream(new FileOutputStream("out.txt"));
+			out.writeObject(this);
+			System.out.println("Save Done");
+		} finally {
+			if (out != null) {
+				out.close();
+			}
+		}
+	}
 
 //    public
 }

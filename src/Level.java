@@ -189,8 +189,8 @@ class Lawn implements Serializable {
 		lawnmowerSetup = false;
 		this.zombietarget = LevelZombieCount.get(this.level);
 	}
-	
-	public void ResetLawn() throws CloneNotSupportedException{
+
+	public void ResetLawn() throws CloneNotSupportedException {
 		activeChars = new ArrayList<>();
 		lawnMowers = new ArrayList<>();
 		double[] arr = { 0, 0 };
@@ -422,8 +422,10 @@ class Lawn implements Serializable {
 			System.out.println("Zombie u " + z.position[0]);
 		}
 		try {
-
-			out = new ObjectOutputStream(new FileOutputStream("out.txt"));
+			String savename = "Save" + this.level + ".txt";
+			Management.users.get(LoginScreen.curr_user).add(this.level, savename);
+			;
+			out = new ObjectOutputStream(new FileOutputStream(savename));
 			out.writeObject(this);
 			System.out.println("Save Done");
 		} finally {

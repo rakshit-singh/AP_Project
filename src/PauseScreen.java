@@ -46,7 +46,7 @@ public class PauseScreen extends Application {
 	}
 
 	@FXML
-	public void SaveState(GameScreen game) throws IOException {
+	public void SaveState(GameScreen1 game) throws IOException {
 
 		ObjectOutputStream out = null;
 

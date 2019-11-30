@@ -74,8 +74,8 @@ public class GameScreen extends Application {
 
 	public Lawn lawn = new Lawn(50, 0);
 	private int zombie_count = Lawn.LevelZombieCount.get(lawn.level);
-	private int zombie_killed = zombie_count;//No. of Zombies to be killed to complete level
-	
+	private int zombie_killed = zombie_count;// No. of Zombies to be killed to
+												// complete level
 
 	private int[] y_coord = { 50, 180, 310, 420, 540 };
 
@@ -265,7 +265,7 @@ public class GameScreen extends Application {
 			checkOpacity();
 			curGif = 2;
 			isPlaced = false;
-			blank_click=false;
+			blank_click = false;
 			// System.out.println(actionEvent.getSource());
 		}
 	}
@@ -337,6 +337,7 @@ public class GameScreen extends Application {
 			isPaused = false;
 		}
 	}
+
 	public void setupTimeline() {
 		KeyFrame kf = new KeyFrame(Duration.seconds(20), new TimeHandler());
 		Timeline timeline = new Timeline(kf);
@@ -436,7 +437,7 @@ public class GameScreen extends Application {
 					if (z.getImage().getX() < 50 && lawn.getLawnMowers().get(z.getLane()) == null) {
 						System.out.println("Game Lost");
 						restart_game();
-//			break;
+						// break;
 					}
 					for (LawnMower l : lawn.getLawnMowers()) {
 						if (l != null) {
@@ -445,12 +446,11 @@ public class GameScreen extends Application {
 								setLawnMower(l.getLane());
 								clearLane(l.getLane());
 
-
 							}
 						}
 					}
 				}
-//	boolean stop = false;
+				// boolean stop = false;
 				for (Zombie z : lawn.getZombie_arr()) {
 					if (!isPaused) {
 						ImageView im = z.getImage();
@@ -458,17 +458,18 @@ public class GameScreen extends Application {
 						if (x < 50 && lawn.getLawnMowers().get(z.getLane()) == null) {
 							System.out.println("Game Lost");
 							restart_game();
-//			break;
+							// break;
 						}
-//		System.out.println(x);
+						// System.out.println(x);
 						if (!z.isStop()) {
-//					im.setTranslateX(x - 10);//Moving the zombie by 1
+							// im.setTranslateX(x - 10);//Moving the zombie by 1
 							im.setX(x - 15);
 						}
 						ArrayList<Integer> removal = new ArrayList<>();
 						for (Character p : lawn.getActiveChars()) {
 							if (p instanceof Plant) {
-								if (im.getLayoutBounds().intersects(p.getImage().getLayoutBounds()) && p.getLane() == z.getLane()) {
+								if (im.getLayoutBounds().intersects(p.getImage().getLayoutBounds())
+										&& p.getLane() == z.getLane()) {
 									System.out.println("True");
 									z.setStop(true);
 									System.out.println("condition met");
@@ -478,7 +479,8 @@ public class GameScreen extends Application {
 										System.out.println("Cherry bomb");
 									}
 								}
-//					System.out.println("Plant health= "+p.health);
+								// System.out.println("Plant health=
+								// "+p.health);
 
 							}
 							removal = lawn.checkPlantStatus();
@@ -512,6 +514,16 @@ public class GameScreen extends Application {
 				}
 			}
 
+			if (lawn.getZombie_arr().size() == 0 && zombie_count <= 0) {
+				System.out.println("In If Block");
+				try {
+					throw new LevelWonException();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					// LoadnextLevel
+				}
+			}
+
 			int lane = -1;
 			// for(Character c: lawn.getActiveChars()){
 			// if(c instanceof Shooter){
@@ -534,6 +546,7 @@ public class GameScreen extends Application {
 			// }
 		}
 	}
+
 	public void setLawnMower(int lane) {
 		if (lane == 0) {
 			movelawnmover(lawnmower_0);
@@ -546,16 +559,16 @@ public class GameScreen extends Application {
 		} else if (lane == 4) {
 			movelawnmover(lawnmower_4);
 		}
-		lawn.getLawnMowers().set(lane,null);
+		lawn.getLawnMowers().set(lane, null);
 
 	}
 
 	@FXML
-public void movelawnmover(ImageView lawnmower) {
-	TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(10), lawnmower);
-	translators.add(translatorObj);
-	// translatorObj.setDuration(Duration.seconds(10));
-	translatorObj.setToX(1200);
+	public void movelawnmover(ImageView lawnmower) {
+		TranslateTransition translatorObj = new TranslateTransition(Duration.seconds(10), lawnmower);
+		translators.add(translatorObj);
+		// translatorObj.setDuration(Duration.seconds(10));
+		translatorObj.setToX(1200);
 		translatorObj.play();
 	}
 
@@ -620,7 +633,7 @@ public void movelawnmover(ImageView lawnmower) {
 				spawn_pea(p);
 			} else if (curGif == 1) {
 
-//				System.out.println("Hey");
+				// System.out.println("Hey");
 				lawn.createObject(lawn.calcLane(sunflower_gif.getY() + 50), curGif, sunflower_gif);
 			} else if (curGif == 2) {
 				lawn.createObject(lawn.calcLane(walnut_gif.getY()), curGif, walnut_gif);
@@ -629,7 +642,7 @@ public void movelawnmover(ImageView lawnmower) {
 			}
 			blank_click = true;
 		}
-		 lawn.displayChar();
+		lawn.displayChar();
 		// System.out.println(lawn.getActiveChars().size());
 		// if (pea_spawnable && curGif == 0) {
 		// ImageView img = new Pea().getPea();
@@ -646,7 +659,7 @@ public void movelawnmover(ImageView lawnmower) {
 		//
 		// pea_spawnable = false;
 		// }
-		 Timeline t = new Timeline();
+		Timeline t = new Timeline();
 
 	}
 
@@ -735,21 +748,19 @@ public void movelawnmover(ImageView lawnmower) {
 
 		}
 	}
-		public void restart_game(){
-			primaryStage.close();
-		}
 
-
-
+	public void restart_game() {
+		primaryStage.close();
+	}
 
 	public void setupLawnmowers() {
-		if(!lawn.isLawnmowerSetup())
+		if (!lawn.isLawnmowerSetup())
 			lawn.getLawnMowers().get(0).setImage(lawnmower_0);
-			lawn.getLawnMowers().get(1).setImage(lawnmower_1);
-			lawn.getLawnMowers().get(2).setImage(lawnmower_2);
-			lawn.getLawnMowers().get(3).setImage(lawnmower_3);
-			lawn.getLawnMowers().get(4).setImage(lawnmower_4);
-			lawn.setLawnmowerSetup(true);
+		lawn.getLawnMowers().get(1).setImage(lawnmower_1);
+		lawn.getLawnMowers().get(2).setImage(lawnmower_2);
+		lawn.getLawnMowers().get(3).setImage(lawnmower_3);
+		lawn.getLawnMowers().get(4).setImage(lawnmower_4);
+		lawn.setLawnmowerSetup(true);
 
 	}
 

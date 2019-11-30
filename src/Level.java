@@ -24,88 +24,92 @@ public class Level {
 
 class Lawn implements Serializable {
 
-//<<<<<<< HEAD
-//class Lawn implements Serializable{
-//    private boolean lawnmowerSetup;
-//
-//    public boolean isLawnmowerSetup() {
-//        return lawnmowerSetup;
-//    }
-//
-//    public void setLawnmowerSetup(boolean lawnmowerSetup) {
-//        this.lawnmowerSetup = lawnmowerSetup;
-//    }
-//
-//    public int getLevel() {
-//        return level;
-//    }
-//
-//    public void setLevel(int level) {
-//        this.level = level;
-//    }
-//
-//    public static HashMap<Integer, Integer> getLevelToZombiesMap() {
-//        return LevelToZombiesMap;
-//    }
-//
-//    public static void setLevelToZombiesMap(HashMap<Integer, Integer> levelToZombiesMap) {
-//        LevelToZombiesMap = levelToZombiesMap;
-//    }
-//
-//    private ArrayList<Character> activeChars;
-//    private static double zombie_start_point = 887;// X Coordinate for spawning the zombies
-//    private double[] y_coord={100,200,330,440,550};
-//    private double[] x_coord={232,306,382,462,539,615,685,756,835};
-//    private double[] spawn_points = { 44, 163, 290, 401, 526 };// Y Coordinates for spawning the zombies
-//    private  ArrayList<Zombie>zombie_arr=new ArrayList<>();
-//    private ArrayList<LawnMower> lawnMowers=new ArrayList<>();
-//
-//    protected int level;
-//	protected static HashMap<Integer, Integer> LevelToZombiesMap;
-//
-//    public ArrayList<LawnMower> getLawnMowers() {
-//        return lawnMowers;
-//    }
-//
-//    public void setLawnMowers(ArrayList<LawnMower> lawnMowers) {
-//        this.lawnMowers = lawnMowers;
-//    }
-//
-//    public Lawn() throws CloneNotSupportedException {
-//
-//
-//        activeChars=new ArrayList<>();
-//        lawnMowers=new ArrayList<>();
-//        double[] arr={0,0};
-//        LawnMower l1=new LawnMower(1000,0,arr,new ImageView());
-//        LawnMower l2=(LawnMower) l1.clone();
-//        LawnMower l3=(LawnMower) l1.clone();
-//        LawnMower l4=(LawnMower) l1.clone();
-//        LawnMower l5=(LawnMower) l1.clone();
-//        l1.setLane(1);
-//        l2.setLane(2);
-//        l3.setLane(3);
-//        l4.setLane(4);
-//        lawnMowers.add(l1);
-//        lawnMowers.add(l2);
-//        lawnMowers.add(l3);
-//        lawnMowers.add(l4);
-//        lawnMowers.add(l5);
-//
-//        LevelToZombiesMap = new HashMap<>();
-//=======
+	// <<<<<<< HEAD
+	// class Lawn implements Serializable{
+	// private boolean lawnmowerSetup;
+	//
+	// public boolean isLawnmowerSetup() {
+	// return lawnmowerSetup;
+	// }
+	//
+	// public void setLawnmowerSetup(boolean lawnmowerSetup) {
+	// this.lawnmowerSetup = lawnmowerSetup;
+	// }
+	//
+	// public int getLevel() {
+	// return level;
+	// }
+	//
+	// public void setLevel(int level) {
+	// this.level = level;
+	// }
+	//
+	// public static HashMap<Integer, Integer> getLevelToZombiesMap() {
+	// return LevelToZombiesMap;
+	// }
+	//
+	// public static void setLevelToZombiesMap(HashMap<Integer, Integer>
+	// levelToZombiesMap) {
+	// LevelToZombiesMap = levelToZombiesMap;
+	// }
+	//
+	// private ArrayList<Character> activeChars;
+	// private static double zombie_start_point = 887;// X Coordinate for
+	// spawning the zombies
+	// private double[] y_coord={100,200,330,440,550};
+	// private double[] x_coord={232,306,382,462,539,615,685,756,835};
+	// private double[] spawn_points = { 44, 163, 290, 401, 526 };// Y
+	// Coordinates for spawning the zombies
+	// private ArrayList<Zombie>zombie_arr=new ArrayList<>();
+	// private ArrayList<LawnMower> lawnMowers=new ArrayList<>();
+	//
+	// protected int level;
+	// protected static HashMap<Integer, Integer> LevelToZombiesMap;
+	//
+	// public ArrayList<LawnMower> getLawnMowers() {
+	// return lawnMowers;
+	// }
+	//
+	// public void setLawnMowers(ArrayList<LawnMower> lawnMowers) {
+	// this.lawnMowers = lawnMowers;
+	// }
+	//
+	// public Lawn() throws CloneNotSupportedException {
+	//
+	//
+	// activeChars=new ArrayList<>();
+	// lawnMowers=new ArrayList<>();
+	// double[] arr={0,0};
+	// LawnMower l1=new LawnMower(1000,0,arr,new ImageView());
+	// LawnMower l2=(LawnMower) l1.clone();
+	// LawnMower l3=(LawnMower) l1.clone();
+	// LawnMower l4=(LawnMower) l1.clone();
+	// LawnMower l5=(LawnMower) l1.clone();
+	// l1.setLane(1);
+	// l2.setLane(2);
+	// l3.setLane(3);
+	// l4.setLane(4);
+	// lawnMowers.add(l1);
+	// lawnMowers.add(l2);
+	// lawnMowers.add(l3);
+	// lawnMowers.add(l4);
+	// lawnMowers.add(l5);
+	//
+	// LevelToZombiesMap = new HashMap<>();
+	// =======
 	/**
 	 * 
 	 */
 	private boolean lawnmowerSetup;
 
-    public boolean isLawnmowerSetup() {
-        return lawnmowerSetup;
-    }
+	public boolean isLawnmowerSetup() {
+		return lawnmowerSetup;
+	}
 
-    public void setLawnmowerSetup(boolean lawnmowerSetup) {
-        this.lawnmowerSetup = lawnmowerSetup;
-    }
+	public void setLawnmowerSetup(boolean lawnmowerSetup) {
+		this.lawnmowerSetup = lawnmowerSetup;
+	}
+
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Character> activeChars;
 	private static double zombie_start_point = 887;// X Coordinate for spawning
@@ -165,7 +169,7 @@ class Lawn implements Serializable {
 		LevelZombieCount.put(1, 20);
 		LevelZombieCount.put(2, 25);
 		LevelZombieCount.put(3, 30);
-		lawnmowerSetup=false;
+		lawnmowerSetup = false;
 		this.zombietarget = LevelZombieCount.get(this.level);
 	}
 
@@ -296,7 +300,14 @@ class Lawn implements Serializable {
 		for (int i = 0; i < activeChars.size(); i++) {
 			if (!activeChars.get(i).isExists()) {
 				activeChars.remove(i);
+			}
+		}
+
+		for (int i = 0; i < zombie_arr.size(); i++) {
+			if (!zombie_arr.get(i).isExists()) {
+				System.out.println("before " + zombie_arr.size());
 				zombie_arr.remove(i);
+				System.out.println("after " + zombie_arr.size());
 				this.zombietarget--;
 			}
 		}
@@ -384,4 +395,12 @@ class Lawn implements Serializable {
 	}
 
 	// public
+}
+
+class LevelWonException extends Exception {
+
+	public LevelWonException() {
+		// TODO Auto-generated constructor stub
+		super("Level Won. Proceeding to the Next Level");
+	}
 }

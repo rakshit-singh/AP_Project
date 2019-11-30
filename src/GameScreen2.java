@@ -235,7 +235,7 @@ public class GameScreen2 extends Application {
 
 	@FXML
 	public void spawn_CherryBomb(javafx.event.ActionEvent actionEvent) {
-		if (lawn.SunCount >= 150) {
+		if (lawn.SunCount >= Integer.MAX_VALUE) {
 			pea_spawnable = true;
 			Image i = new Image("CherryBomb_gif.gif");
 			CherryBomb_gif = new ImageView(i);
@@ -254,7 +254,7 @@ public class GameScreen2 extends Application {
 
 	@FXML
 	public void spawn_walnut(javafx.event.ActionEvent actionEvent) {
-		if (lawn.SunCount >= 50) {
+		if (lawn.SunCount >= Integer.MAX_VALUE) {
 			pea_spawnable = true;
 			Image i = new Image("walnut_gif.gif");
 			walnut_gif = new ImageView(i);
@@ -272,18 +272,18 @@ public class GameScreen2 extends Application {
 	}
 
 	public void checkOpacity() {
-		if (lawn.SunCount < 50) {
-			sidebar_sunflower.setOpacity(0.5);
-			sidebar_walnut.setOpacity(0.5);
-			sidebar_shooter.setOpacity(0.5);
-			cherry_img.setOpacity(0.5);
-		}
+		// if (lawn.SunCount < 50) {
+		// sidebar_sunflower.setOpacity(0.5);
+		// sidebar_walnut.setOpacity(0.5);
+		// sidebar_shooter.setOpacity(0.5);
+		// cherry_img.setOpacity(0.5);
+		// }
 
-		else if (lawn.SunCount < 100) {
+		if (lawn.SunCount < 100) {
 			sidebar_shooter.setOpacity(0.5);
 			cherry_img.setOpacity(0.5);
 			sidebar_sunflower.setOpacity(1);
-			sidebar_walnut.setOpacity(1);
+			sidebar_walnut.setOpacity(0.5);
 		}
 
 		else if (lawn.SunCount < 150) {
@@ -291,14 +291,14 @@ public class GameScreen2 extends Application {
 			sidebar_shooter.setOpacity(1);
 			cherry_img.setOpacity(0.5);
 			sidebar_sunflower.setOpacity(1);
-			sidebar_walnut.setOpacity(1);
+			sidebar_walnut.setOpacity(0.5);
 
 		} else {
-			cherry_img.setOpacity(1);
+			cherry_img.setOpacity(0.5);
 			sidebar_shooter.setOpacity(1);
 			// cherry_img.setOpacity(0.5);
 			sidebar_sunflower.setOpacity(1);
-			sidebar_walnut.setOpacity(1);
+			sidebar_walnut.setOpacity(0.5);
 		}
 		// repeeater_img.setOpacity(0.5);
 		// cherry_img.setOpacity(0.5);

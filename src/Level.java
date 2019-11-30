@@ -100,6 +100,16 @@ class Lawn implements Serializable {
 	/**
 	 * 
 	 */
+	private boolean isLevelChangeNeeded;
+
+	public boolean isLevelChangeNeeded() {
+		return isLevelChangeNeeded;
+	}
+
+	public void setLevelChangeNeeded(boolean levelChangeNeeded) {
+		isLevelChangeNeeded = levelChangeNeeded;
+	}
+
 	private boolean lawnmowerSetup;
 
 	public boolean isLawnmowerSetup() {
@@ -137,7 +147,7 @@ class Lawn implements Serializable {
 	}
 
 	public Lawn(int Suncount, int level) throws CloneNotSupportedException {
-
+		setLevelChangeNeeded(false);
 		this.SunCount = Suncount;
 		this.level = level;
 		activeChars = new ArrayList<>();

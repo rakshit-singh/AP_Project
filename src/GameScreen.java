@@ -34,6 +34,7 @@ public class GameScreen extends Application {
 	private boolean blank_click = true;
 	private Stage primaryStage2;
 	private ImageView sunflower_sun;
+
 	@FXML
 	private Button shooter_button;
 	@FXML
@@ -515,10 +516,23 @@ public class GameScreen extends Application {
 			}
 
 			if (lawn.getZombie_arr().size() == 0 && zombie_count <= 0) {
+				lawn.setLevelChangeNeeded(true);
 				System.out.println("In If Block");
+//				change_level();
 				try {
 					throw new LevelWonException();
 				} catch (Exception e) {
+					try {
+						if(lawn.isLevelChangeNeeded()) {
+							lawn.setLevelChangeNeeded(false);
+							zombie_count=3;
+							change_level();
+						}
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					} catch (CloneNotSupportedException ex) {
+						ex.printStackTrace();
+					}
 					System.out.println(e.getMessage());
 					// LoadnextLevel
 				}
@@ -761,6 +775,19 @@ public class GameScreen extends Application {
 		lawn.getLawnMowers().get(3).setImage(lawnmower_3);
 		lawn.getLawnMowers().get(4).setImage(lawnmower_4);
 		lawn.setLawnmowerSetup(true);
+
+	}
+	public void change_level() throws IOException, CloneNotSupportedException {
+//		Stage stage = (Stage) menu.getScene().getWindow();
+//		stage.close();
+//		Stage ps2=new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+		Scene scene = new Scene(root);
+		((Stage) Anchor.getScene().getWindow()).setTitle("Game Screen");
+		((Stage) Anchor.getScene().getWindow()).setScene(scene);
+		primaryStage.show();
+		lawn=new Lawn(0,0);
+		System.out.println("New lawn");
 
 	}
 

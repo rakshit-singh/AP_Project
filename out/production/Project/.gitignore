@@ -8,8 +8,11 @@
 /Cherrybomb.class
 /ConeZombie.class
 /Conehead_Zombie.gif
+/Defend.class
 /GameScreen$1.class
+/GameScreen$SunflowerHandler.class
 /GameScreen$TimeHandler.class
+/GameScreen$ZombieTimeHandler.class
 /GameScreen.class
 /GameScreen.fxml
 /JavelinZombie.class
@@ -45,6 +48,7 @@
 /progress_bar.jpg
 /repeater.jpg
 /sample/
+/saveposition.class
 /shooter.jpg
 /shooter_gif.gif
 /shooter_gif.webp
@@ -54,6 +58,4 @@
 /wallpaper.jpg
 /walnut_gif.gif
 /walnut_gif.webp
-/saveposition.class
-/GameScreen$ZombieTimeHandler.class
 /zombie_normal.gif

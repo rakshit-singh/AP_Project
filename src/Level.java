@@ -182,11 +182,32 @@ class Lawn implements Serializable {
 		LevelToZombiesMap.put(4, 3);
 
 		LevelZombieCount = new HashMap<>();
-		LevelZombieCount.put(0, 3);
-		LevelZombieCount.put(1, 20);
-		LevelZombieCount.put(2, 25);
+		LevelZombieCount.put(0, 1);
+		LevelZombieCount.put(1, 2);
+		LevelZombieCount.put(2, 3);
 		LevelZombieCount.put(3, 30);
 		lawnmowerSetup = false;
+		this.zombietarget = LevelZombieCount.get(this.level);
+	}
+	
+	public void ResetLawn() throws CloneNotSupportedException{
+		activeChars = new ArrayList<>();
+		lawnMowers = new ArrayList<>();
+		double[] arr = { 0, 0 };
+		LawnMower l1 = new LawnMower(1000, 0, arr, new ImageView());
+		LawnMower l2 = (LawnMower) l1.clone();
+		LawnMower l3 = (LawnMower) l1.clone();
+		LawnMower l4 = (LawnMower) l1.clone();
+		LawnMower l5 = (LawnMower) l1.clone();
+		l1.setLane(1);
+		l2.setLane(2);
+		l3.setLane(3);
+		l4.setLane(4);
+		lawnMowers.add(l1);
+		lawnMowers.add(l2);
+		lawnMowers.add(l3);
+		lawnMowers.add(l4);
+		lawnMowers.add(l5);
 		this.zombietarget = LevelZombieCount.get(this.level);
 	}
 

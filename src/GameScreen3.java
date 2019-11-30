@@ -522,6 +522,14 @@ public class GameScreen3 extends Application {
 				try {
 					throw new LevelWonException();
 				} catch (Exception e) {
+					if(lawn.isLevelChangeNeeded()){
+						lawn.setLevelChangeNeeded(false);
+						try {
+							change_level();
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+					}
 					// try {
 					// if (lawn.isLevelChangeNeeded()) {
 					// lawn.setLevelChangeNeeded(false);
@@ -713,7 +721,7 @@ public class GameScreen3 extends Application {
 	public void moveSlider() {
 
 		Timeline task = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(slider.progressProperty(), 0)),
-				new KeyFrame(Duration.seconds(60), new KeyValue(slider.progressProperty(), 1)));
+				new KeyFrame(Duration.seconds(12*zombie_count), new KeyValue(slider.progressProperty(), 1)));
 		task.playFromStart();
 	}
 
@@ -824,5 +832,16 @@ public class GameScreen3 extends Application {
 	// System.out.println("New lawn");
 	//
 	// }
+	public void change_level() throws IOException {
+
+		Parent root = FXMLLoader.load(getClass().getResource("ChooseLevel.fxml"));
+		Scene scene = new Scene(root);
+		((Stage) Anchor.getScene().getWindow()).setTitle("Login Screen");
+		((Stage) Anchor.getScene().getWindow()).setScene(scene);
+		primaryStage.show();
+		// lawn=new Lawn(0,0);
+		System.out.println("New lawn");
+
+	}
 
 }

@@ -80,7 +80,7 @@ public class GameScreen1 extends Application {
 	@FXML
 	public ImageView lawnmower_4;
 	@FXML
-	public Lawn lawn = new Lawn(0, 0);
+	public Lawn lawn = new Lawn(100, 0);
 
 	private int zombie_count = Lawn.LevelZombieCount.get(lawn.level);
 
@@ -284,12 +284,12 @@ public class GameScreen1 extends Application {
 
 	public void checkOpacity() {
 
-		// if (lawn.SunCount < 50) {
-		// sidebar_sunflower.setOpacity(0.5);
-		// sidebar_walnut.setOpacity(0.5);
-		// sidebar_shooter.setOpacity(0.5);
-		// cherry_img.setOpacity(0.5);
-		// }
+		 if (lawn.SunCount < 50) {
+		 sidebar_sunflower.setOpacity(0);
+		 sidebar_walnut.setOpacity(0);
+		 sidebar_shooter.setOpacity(0.5);
+		 cherry_img.setOpacity(0);
+		 }
 
 		if (lawn.SunCount < 100) {
 			sidebar_shooter.setOpacity(0.5);
@@ -736,7 +736,7 @@ public class GameScreen1 extends Application {
 	public void moveSlider() {
 
 		Timeline task = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(slider.progressProperty(), 0)),
-				new KeyFrame(Duration.seconds(60), new KeyValue(slider.progressProperty(), 1)));
+				new KeyFrame(Duration.seconds(12*zombie_count), new KeyValue(slider.progressProperty(), 1)));
 		task.playFromStart();
 	}
 
@@ -835,7 +835,7 @@ public class GameScreen1 extends Application {
 
 	public void change_level() throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("ChooseLevel.fxml"));
 		Scene scene = new Scene(root);
 		((Stage) Anchor.getScene().getWindow()).setTitle("Login Screen");
 		((Stage) Anchor.getScene().getWindow()).setScene(scene);

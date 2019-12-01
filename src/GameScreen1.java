@@ -832,6 +832,7 @@ public class GameScreen1 extends Application {
 	}
 
 	public void restart_game() throws IOException {
+
 		Parent root = FXMLLoader.load(getClass().getResource("ChooseLevel.fxml"));
 		Scene scene = new Scene(root);
 		((Stage) Anchor.getScene().getWindow()).setTitle("Choose Level");

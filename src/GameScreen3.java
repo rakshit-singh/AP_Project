@@ -279,7 +279,7 @@ public class GameScreen3 extends Application {
 			cherry_img.setOpacity(0);
 		}
 
-		if (lawn.SunCount < 100) {
+		else if (lawn.SunCount < 100) {
 			sidebar_shooter.setOpacity(0.5);
 			cherry_img.setOpacity(0);
 			sidebar_sunflower.setOpacity(1);
@@ -813,9 +813,9 @@ public class GameScreen3 extends Application {
 	}
 
 	public void restart_game() throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("ChooseLevel.fxml"));
 		Scene scene = new Scene(root);
-		((Stage) Anchor.getScene().getWindow()).setTitle("Login Screen");
+		((Stage) Anchor.getScene().getWindow()).setTitle("Choose Level");
 		((Stage) Anchor.getScene().getWindow()).setScene(scene);
 		primaryStage.show();
 	}

@@ -337,6 +337,7 @@ public class GameScreen1 extends Application {
 			for (TranslateTransition i : translators) {
 				i.pause();
 			}
+			lawn.Serialize();
 			isPaused = true;
 			primaryStage2 = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("P1.fxml"));
@@ -409,8 +410,7 @@ public class GameScreen1 extends Application {
 						removal.add(z);
 					}
 				}
-				
-				
+
 				for (Zombie i : removal) {
 					lawn.getActiveChars().remove(i);
 					lawn.getZombie_arr().remove(i);
@@ -455,7 +455,7 @@ public class GameScreen1 extends Application {
 					// if (z.getImage().getX() < 50 &&
 					// lawn.getLawnMowers().get(z.getLane()).getImage().getX()>100)
 					// {
-					if (z.getImage().getX() == 0) {
+					if (z.getImage().getX() <= 0) {
 						System.out.println("Game Lost");
 						try {
 							restart_game();
@@ -465,7 +465,7 @@ public class GameScreen1 extends Application {
 						// break;
 					}
 					for (LawnMower l : lawn.getLawnMowers()) {
-						if (l != null) {
+						if (l.isExists()) {
 							if (z.getImage().getX() < l.getImage().getX() + 200 && z.getLane() == l.getLane()) {
 								System.out.println("Clear 1");
 								setLawnMower(l.getLane());
@@ -480,7 +480,7 @@ public class GameScreen1 extends Application {
 					if (!isPaused) {
 						ImageView im = z.getImage();
 						double x = im.getX();
-						if (x < 50 && lawn.getLawnMowers().get(z.getLane()).getImage().getX() > 100) {
+						if (z.getImage().getX() <= 0 && !lawn.getLawnMowers().get(z.lane).isExists()) {
 							System.out.println("Game Lost");
 							try {
 								restart_game();
@@ -641,7 +641,7 @@ public class GameScreen1 extends Application {
 		} else if (lane == 4) {
 			movelawnmover(lawnmower_4);
 		}
-		// lawn.getLawnMowers().set(lane, null);
+		lawn.getLawnMowers().get(lane).setExists(false);
 
 	}
 

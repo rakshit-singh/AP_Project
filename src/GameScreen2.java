@@ -272,12 +272,12 @@ public class GameScreen2 extends Application {
 	}
 
 	public void checkOpacity() {
-		 if (lawn.SunCount < 50) {
-		 sidebar_sunflower.setOpacity(0.5);
-		 sidebar_walnut.setOpacity(0.5);
-		 sidebar_shooter.setOpacity(0.5);
-		 cherry_img.setOpacity(0.5);
-		 }
+		if (lawn.SunCount < 50) {
+			sidebar_sunflower.setOpacity(0.5);
+			sidebar_walnut.setOpacity(0.5);
+			sidebar_shooter.setOpacity(0.5);
+			cherry_img.setOpacity(0.5);
+		}
 
 		if (lawn.SunCount < 100) {
 			sidebar_shooter.setOpacity(0.5);
@@ -325,6 +325,7 @@ public class GameScreen2 extends Application {
 			for (TranslateTransition i : translators) {
 				i.pause();
 			}
+			lawn.Serialize();
 			isPaused = true;
 			primaryStage2 = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("P1.fxml"));
@@ -435,7 +436,7 @@ public class GameScreen2 extends Application {
 
 				}
 				for (Zombie z : lawn.getZombie_arr()) {
-					if (z.getImage().getX() < 50 && lawn.getLawnMowers().get(z.getLane()).getImage().getX()>100) {
+					if (z.getImage().getX() < 50) {
 						System.out.println("Game Lost");
 						try {
 							restart_game();
@@ -445,7 +446,7 @@ public class GameScreen2 extends Application {
 						// break;
 					}
 					for (LawnMower l : lawn.getLawnMowers()) {
-						if (l != null) {
+						if (l.isExists()) {
 							if (z.getImage().getX() < l.getImage().getX() + 200 && z.getLane() == l.getLane()) {
 								System.out.println("Clear 1");
 								setLawnMower(l.getLane());
@@ -460,7 +461,7 @@ public class GameScreen2 extends Application {
 					if (!isPaused) {
 						ImageView im = z.getImage();
 						double x = im.getX();
-						if (x < 50 && lawn.getLawnMowers().get(z.getLane()).getImage().getX()>100) {
+						if (z.getImage().getX() <= 0) {
 							System.out.println("Game Lost");
 							try {
 								restart_game();
@@ -531,7 +532,7 @@ public class GameScreen2 extends Application {
 					throw new LevelWonException();
 				} catch (Exception e) {
 
-					if(lawn.isLevelChangeNeeded()){
+					if (lawn.isLevelChangeNeeded()) {
 						lawn.setLevelChangeNeeded(false);
 						try {
 							change_level();
@@ -622,7 +623,7 @@ public class GameScreen2 extends Application {
 		} else if (lane == 4) {
 			movelawnmover(lawnmower_4);
 		}
-//		lawn.getLawnMowers().set(lane, null);
+		lawn.getLawnMowers().get(lane).setExists(false);
 
 	}
 
@@ -730,7 +731,7 @@ public class GameScreen2 extends Application {
 	public void moveSlider() {
 
 		Timeline task = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(slider.progressProperty(), 0)),
-				new KeyFrame(Duration.seconds(12*zombie_count), new KeyValue(slider.progressProperty(), 1)));
+				new KeyFrame(Duration.seconds(12 * zombie_count), new KeyValue(slider.progressProperty(), 1)));
 		task.playFromStart();
 	}
 
@@ -830,6 +831,7 @@ public class GameScreen2 extends Application {
 		lawn.setLawnmowerSetup(true);
 
 	}
+
 	public void change_level() throws IOException {
 
 		Parent root = FXMLLoader.load(getClass().getResource("ChooseLevel.fxml"));

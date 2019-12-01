@@ -8,7 +8,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.awt.TextField;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 public class LoginScreen extends Application {
@@ -61,7 +64,8 @@ public class LoginScreen extends Application {
 				Management.users.put(curr_user, new ArrayList<>(4));
 			}
 			System.out.println(curr_user);
-//			Parent loader = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+			// Parent loader =
+			// FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 			Parent loader = FXMLLoader.load(getClass().getResource("ChooseLevel.fxml"));
 
 			Scene scene = new Scene(loader);
@@ -71,4 +75,19 @@ public class LoginScreen extends Application {
 		}
 	}
 
+	public void Deserealize(String filename) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+		ObjectInputStream in = null;
+
+		try {
+			in = new ObjectInputStream(new FileInputStream(filename));
+			Lawn l = (Lawn) in.readObject();
+		} catch (ClassCastException e) {
+			// TODO: handle exception
+		} finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+	}
 }

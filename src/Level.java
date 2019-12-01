@@ -176,7 +176,7 @@ class Lawn implements Serializable {
 		LevelToZombiesMap.put(4, 3);
 
 		LevelZombieCount = new HashMap<>();
-		LevelZombieCount.put(0, 20);
+		LevelZombieCount.put(0, 2);
 		LevelZombieCount.put(1, 4);
 		LevelZombieCount.put(2, 6);
 		LevelZombieCount.put(3, 8);
@@ -410,7 +410,7 @@ class Lawn implements Serializable {
 
 	public void Serialize() throws IOException {
 		ObjectOutputStream out = null;
-		System.out.println("In Function");
+		// System.out.println("In Function");
 		for (Zombie z : this.getZombie_arr()) {
 			System.out.println("Zombie c " + z.getImage().getX() + " " + z.position[0] + " " + z.getLane());
 			z.position[0] = z.getImage().getX();
@@ -418,11 +418,14 @@ class Lawn implements Serializable {
 		}
 		try {
 			String savename = "Save" + this.level + ".txt";
-			Management.users.get(LoginScreen.curr_user).add(this.level, savename);
-			;
+			try {
+				Management.users.get(LoginScreen.curr_user).add(this.level, savename);
+			} catch (NullPointerException e) {
+
+			}
 			out = new ObjectOutputStream(new FileOutputStream(savename));
 			out.writeObject(this);
-			System.out.println("Save Done");
+			// System.out.println("Save Done");
 		} finally {
 			if (out != null) {
 				out.close();
